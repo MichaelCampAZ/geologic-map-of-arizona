@@ -1,20 +1,20 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import ContactsAndFaults from './data/ContactsAndFaults.json'
+import triangle from './svg/triangle.svg'
 import './App.css';
 
 function App() {
 
-  function cfStyle(geoJsonFeature) {
-
+  const cfStyle = (geoJsonFeature) => {
     switch (geoJsonFeature.properties.type) {
       case 'Contact':
-        return {color:'#0000FF'}
-        case 'Quaternary Contact':
-          return {color:'#5EC37F'}
-        case 'Fault':
-          return {color:'#FF1493'}
+        return { dashArray: '3' }
+      case 'Quaternary Contact':
+        return { color: '#5EC37F' }
+      case 'Fault':
+        return { color: '#FF1493' }
       default:
-        return {color:'#7CFC00'}
+        return { color: '#7CFC00' }
     }
   }
 
