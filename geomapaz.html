@@ -70,9 +70,8 @@
     </div>
 
     <script type="text/javascript" src="./data/mup.js"></script>
-    <script type="text/javascript" src="./data/cf.js"></script>
     <script>
-        var map = L.map('map').setView([34.1618, -111.6211], 7);
+        var map = L.map('map').setView([34.1618, -111.6211], 6.5);
 
         var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
@@ -83,10 +82,15 @@
             return "#" + ((1 << 24) * Math.random() | 0).toString(16);
         }
 
+        function onEachFeature(feature, layer) {
+            console.log(feature);
+        }
+
         var mupOptions = {
             maxZoom: 16,
             tolerance: 3,
             debug: 0,
+            onEachFeature: onEachFeature,
             style: (properties) => {
                 switch (properties.mapunit) {
                     case 'Q':
@@ -197,19 +201,6 @@
             }
         };
         L.geoJson.vt(mupGeo, mupOptions).addTo(map);
-
-        // Contacts and Faults     
-        var cfGeo = topojson.feature(cfTopo, cfTopo.objects['ContactsAndFaults (AZ Geology)']);
-        var cfOptions = {
-            maxZoom: 16,
-            tolerance: 3,
-            debug: 0,
-            style: {
-                color: "#008080",
-                weight: 1
-            },
-        };
-        L.geoJson.vt(cfGeo, cfOptions).addTo(map);
 
     </script>
 </body>
