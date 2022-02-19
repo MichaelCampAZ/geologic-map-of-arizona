@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import ContactsAndFaults from './data/ContactsAndFaults.json'
-import MapUnitPolys from './data/MapUnitPolys.json'
+// import MapUnitPolys from './data/MapUnitPolys.json'
 
 import './App.css';
 import './geolines.css';
@@ -19,9 +19,9 @@ function App() {
     // }
   }
 
-  const mupStyle = (geoJsonFeature) => {
-    return { color: 'black', weight: 1, fillColor: "#" + ((1<<24)*Math.random() | 0).toString(16) };
-  }
+  // const mupStyle = (geoJsonFeature) => {
+  //   return { color: 'black', weight: 1, fillColor: "#" + ((1<<24)*Math.random() | 0).toString(16) };
+  // }
 
   return (
     <div className="App">
@@ -31,7 +31,7 @@ function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <GeoJSON data={MapUnitPolys} style={mupStyle} />
+        {/* <GeoJSON data={MapUnitPolys} style={mupStyle} /> */}
 
         <GeoJSON data={ContactsAndFaults} style={cfStyle} />
 
