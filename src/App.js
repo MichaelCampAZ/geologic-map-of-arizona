@@ -1,21 +1,26 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import ContactsAndFaults from './data/ContactsAndFaults.json'
-import triangle from './svg/triangle.svg'
+import MapUnitPolys from './data/MapUnitPolys.json'
+
 import './App.css';
+import './geolines.css';
 
 function App() {
-
+ 
   const cfStyle = (geoJsonFeature) => {
-    switch (geoJsonFeature.properties.type) {
-      case 'Contact':
-        return { dashArray: '3' }
-      case 'Quaternary Contact':
-        return { color: '#5EC37F' }
-      case 'Fault':
-        return { color: '#FF1493' }
-      default:
-        return { color: '#7CFC00' }
-    }
+    return { color: '#008080', weight: 1 }
+    // switch (geoJsonFeature.properties.symbol) {
+    //   case 1:
+    //   case 306:
+    //     return { className: 'contactsandfaults' }
+    //   default:
+    //     // console.log(geoJsonFeature.properties.symbol);
+    //     return { color: '#ffff00' }
+    // }
+  }
+
+  const mupStyle = (geoJsonFeature) => {
+    return { color: 'black', weight: 1, fillColor: "#" + ((1<<24)*Math.random() | 0).toString(16) };
   }
 
   return (
@@ -25,6 +30,8 @@ function App() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        <GeoJSON data={MapUnitPolys} style={mupStyle} />
 
         <GeoJSON data={ContactsAndFaults} style={cfStyle} />
 
