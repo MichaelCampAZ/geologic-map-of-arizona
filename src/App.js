@@ -31,7 +31,7 @@ function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <GeoJSON data={MapUnitPolys} style={mupStyle} />
+        {/* <GeoJSON data={MapUnitPolys} style={mupStyle} /> */}
 
         <GeoJSON data={ContactsAndFaults} style={cfStyle} />
 
