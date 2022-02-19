@@ -78,19 +78,10 @@
 
         var mupGeo = topojson.feature(mupTopo, mupTopo.objects['MapUnitPolys (AZ Geology)']);
 
-        function polygonFill(feature) {
-            return "#" + ((1 << 24) * Math.random() | 0).toString(16);
-        }
-
-        function onEachFeature(feature, layer) {
-            console.log(feature);
-        }
-
         var mupOptions = {
             maxZoom: 16,
             tolerance: 3,
             debug: 0,
-            onEachFeature: onEachFeature,
             style: (properties) => {
                 switch (properties.mapunit) {
                     case 'Q':
