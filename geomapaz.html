@@ -32,6 +32,11 @@
     <!-- topojson -->
     <script src="./js/topojson.min.js"></script>
 
+    <!-- Fullscreen -->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />
+
     <title>Geologic Map of Arizona</title>
 
 </head>
@@ -207,10 +212,9 @@
 
     <script type="text/javascript" src="./data/mup.js"></script>
     <script>
-        var map = L.map('map').setView([34.1618, -111.6211], 6.5);
 
-        var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+        var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            { maxZoom: 16, minZoom: 6, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
 
         var mupGeo = topojson.feature(mupTopo, mupTopo.objects['MapUnitPolys (AZ Geology)']);
 
@@ -322,7 +326,26 @@
             }
         }
 
-        L.geoJSON(mupGeo, { style: mupStyle }).addTo(map);
+        var MapUnitsPoly = L.geoJSON(mupGeo, { style: mupStyle });
+
+        var map = L.map('map', {
+            center: [34.1618, -111.6211],
+            zoom: 7,
+            layers: [OpenStreetMap, MapUnitsPoly]
+        });
+
+        var baseMaps = {
+            "Open Street Map": OpenStreetMap,
+        };
+
+        var overlayMaps = {
+            "Map Unit Polys": MapUnitsPoly
+        };
+
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
+        
+        // Fullscreen
+        map.addControl(new L.Control.Fullscreen());
 
     </script>
 </body>
