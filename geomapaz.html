@@ -31,10 +31,6 @@
     <!-- topojson -->
     <script src="./js/topojson.min.js"></script>
 
-    <!-- leaflet-geojson-vt -->
-    <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
-    <script src="./js/leaflet-geojson-vt.js"></script>
-
     <title>Geologic Map of Arizona</title>
 
 </head>
@@ -78,120 +74,115 @@
 
         var mupGeo = topojson.feature(mupTopo, mupTopo.objects['MapUnitPolys (AZ Geology)']);
 
-        var mupOptions = {
-            maxZoom: 16,
-            tolerance: 3,
-            debug: 0,
-            style: (properties) => {
-                switch (properties.mapunit) {
-                    case 'Q':
-                        return { weight: 1, fillColor: '#F4F2E6' }
-                    case 'QTb':
-                        return { weight: 1, fillColor: '#F0D5F0' }
-                    case 'QTv':
-                        return { weight: 1, fillColor: '#E3C4F0' }
-                    case 'Qr':
-                        return { weight: 1, fillColor: '#FFFFBA' }
-                    case 'Qy':
-                        return { weight: 1, fillColor: '#FFFFE3' }
-                    case 'Qm':
-                        return { weight: 1, fillColor: '#FFFFBA' }
-                    case 'Qo':
-                        return { weight: 1, fillColor: '#FDFC9B' }
-                    case 'QTs':
-                        return { weight: 1, fillColor: '#FFE8BA' }
-                    case 'Tvy':
-                        return { weight: 1, fillColor: '#FFA8FF' }
-                    case 'Tsy':
-                        return { weight: 1, fillColor: '#FFE8C4' }
-                    case 'Tby':
-                        return { weight: 1, fillColor: '#FFBAE3' }
-                    case 'Tb':
-                        return { weight: 1, fillColor: '#FF9EE3' }
-                    case 'Tsv':
-                        return { weight: 1, fillColor: '#FBC47B' }
-                    case 'Tsm':
-                        return { weight: 1, fillColor: '#E2B854' }
-                    case 'Tv':
-                        return { weight: 1, fillColor: '#FDC158' }
-                    case 'Tg':
-                        return { weight: 1, fillColor: '#FBBA7B' }
-                    case 'Ti':
-                        return { weight: 1, fillColor: '#FD9E69' }
-                    case 'TXgn':
-                        return { weight: 1, fillColor: '#FB9AAA' }
-                    case 'Tso':
-                        return { weight: 1, fillColor: '#EED792' }
-                    case 'TKgm':
-                        return { weight: 1, fillColor: '#FF8791' }
-                    case 'TKg':
-                        return { weight: 1, fillColor: '#FD7765' }
-                    case 'Kv':
-                        return { weight: 1, fillColor: '#D1FF87' }
-                    case 'KJo':
-                        return { weight: 1, fillColor: '#BAFF9E' }
-                    case 'KJs':
-                        return { weight: 1, fillColor: '#BAFF9E' }
-                    case 'Kmv':
-                        return { weight: 1, fillColor: '#E8FFA8' }
-                    case 'Ks':
-                        return { weight: 1, fillColor: '#B3FB85' }
-                    case 'Jm':
-                        return { weight: 1, fillColor: '#78F077' }
-                    case 'Jsv':
-                        return { weight: 1, fillColor: '#7DFFB2' }
-                    case 'Jg':
-                        return { weight: 1, fillColor: '#E45FB0' }
-                    case 'Jv':
-                        return { weight: 1, fillColor: '#7DFFB2' }
-                    case 'J^':
-                        return { weight: 1, fillColor: '#B2FFF0' }
-                    case '}|':
-                        return { weight: 1, fillColor: '#81FD80' }
-                    case 'Js':
-                        return { weight: 1, fillColor: '#79E29D' }
-                    case 'Jgc':
-                        return { weight: 1, fillColor: '#6DF1A8' }
-                    case '^c':
-                        return { weight: 1, fillColor: '#7DFFD1' }
-                    case '^cs':
-                        return { weight: 1, fillColor: '#7DFFD1' }
-                    case '^m':
-                        return { weight: 1, fillColor: '#90DED4' }
-                    case '|':
-                        return { weight: 1, fillColor: '#7BECFB' }
-                    case 'P':
-                        return { weight: 1, fillColor: '#A8F0FF' }
-                    case 'P*':
-                        return { weight: 1, fillColor: '#9ED9FF' }
-                    case 'M_':
-                        return { weight: 1, fillColor: '#C4D9F0' }
-                    case 'Ys':
-                        return { weight: 1, fillColor: '#BAB2FF' }
-                    case 'Yd':
-                        return { weight: 1, fillColor: '#D597D0' }
-                    case 'YXg':
-                        return { weight: 1, fillColor: '#D1A177' }
-                    case 'Yg':
-                        return { weight: 1, fillColor: '#CA8B4F' }
-                    case 'Xg':
-                        return { weight: 1, fillColor: '#BA827B' }
-                    case 'Xms':
-                        return { weight: 1, fillColor: '#B9C4B9' }
-                    case 'Xq':
-                        return { weight: 1, fillColor: '#92B35F' }
-                    case 'Xmv':
-                        return { weight: 1, fillColor: '#90B388' }
-                    case 'Xm':
-                        return { weight: 1, fillColor: '#B2B25F' }
-                    default:
-                        console.log(`DEFAULT: ` + properties.mapunit);
-                        return { weight: 1, fillColor: '#000000' }
-                }
-
+        function mupStyle(feature) {
+            switch (feature.properties.mapunit) {
+                case 'Q':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#F4F2E6' }
+                case 'QTb':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#F0D5F0' }
+                case 'QTv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E3C4F0' }
+                case 'Qr':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFFFBA' }
+                case 'Qy':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFFFE3' }
+                case 'Qm':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFFFBA' }
+                case 'Qo':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FDFC9B' }
+                case 'QTs':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFE8BA' }
+                case 'Tvy':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFA8FF' }
+                case 'Tsy':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFE8C4' }
+                case 'Tby':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFBAE3' }
+                case 'Tb':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FF9EE3' }
+                case 'Tsv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FBC47B' }
+                case 'Tsm':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E2B854' }
+                case 'Tv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FDC158' }
+                case 'Tg':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FBBA7B' }
+                case 'Ti':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FD9E69' }
+                case 'TXgn':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FB9AAA' }
+                case 'Tso':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#EED792' }
+                case 'TKgm':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FF8791' }
+                case 'TKg':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FD7765' }
+                case 'Kv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#D1FF87' }
+                case 'KJo':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BAFF9E' }
+                case 'KJs':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BAFF9E' }
+                case 'Kmv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E8FFA8' }
+                case 'Ks':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B3FB85' }
+                case 'Jm':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#78F077' }
+                case 'Jsv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFB2' }
+                case 'Jg':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E45FB0' }
+                case 'Jv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFB2' }
+                case 'J^':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B2FFF0' }
+                case '}|':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#81FD80' }
+                case 'Js':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#79E29D' }
+                case 'Jgc':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#6DF1A8' }
+                case '^c':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFD1' }
+                case '^cs':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFD1' }
+                case '^m':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#90DED4' }
+                case '|':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7BECFB' }
+                case 'P':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#A8F0FF' }
+                case 'P*':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#9ED9FF' }
+                case 'M_':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#C4D9F0' }
+                case 'Ys':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BAB2FF' }
+                case 'Yd':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#D597D0' }
+                case 'YXg':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#D1A177' }
+                case 'Yg':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#CA8B4F' }
+                case 'Xg':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BA827B' }
+                case 'Xms':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B9C4B9' }
+                case 'Xq':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#92B35F' }
+                case 'Xmv':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#90B388' }
+                case 'Xm':
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B2B25F' }
+                default:
+                    console.log(`DEFAULT: ` + properties.mapunit);
+                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#000000' }
             }
-        };
-        L.geoJson.vt(mupGeo, mupOptions).addTo(map);
+        }
+        
+        L.geoJSON(mupGeo, { style: mupStyle }).addTo(map);
 
     </script>
 </body>
