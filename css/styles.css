@@ -16,3 +16,9 @@ body {
   color: #333333;
   background-color: #e6e3d9;
 }
+
+[data-mapunit] {
+  border-style: solid;
+  border-width: 2px;
+  text-align: center;
+}
