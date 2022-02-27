@@ -220,7 +220,7 @@
                 MapUnitPolysStyles[key] = {
                     "id": val.id,
                     "source": val.source,
-                    "source-layer": val.source - layer,
+                    "source-layer": val["source-layer"],
                     "fill-color": val.paint["fill-color"],
                     "fill-outline-color": val.paint["fill-outline-color"],
                 }
@@ -228,15 +228,10 @@
 
         });
 
-        var map = L.map('map', {
-            center: [32.24, -110.98],
-            zoom: 11,
-        });
-
         var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            { maxZoom: 16, minZoom: 5, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+            { maxZoom: 16, minZoom: 5, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
 
-        var layer = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
+        var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
             attribution: 'Arizona Geological Survey',
             vectorTileLayerStyles: {
                 "Map Unit Polys": function (properties, zoom, geometryDimension) {
@@ -250,19 +245,22 @@
                 }
             },
             interactive: true
-        }).addTo(map);
-
-        layer.on('click', function (e) {
-            // console.log(e);
-            // console.log(e.sourceTarget.properties._symbol);
-            console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"])
         });
 
-        // CONTROLS
-        // L.control.layers({
-        // 	"OpenStreetMap": OpenStreetMap,
-        // 	"MUPS": layer
-        // }, {}, {collapsed: false}).addTo(map);
+        var map = L.map('map', {
+            center: [32.24, -110.98],
+            zoom: 11,
+            layers: [OpenStreetMap, mups]
+        });
+
+        L.control.layers({"Street Map": OpenStreetMap}, {"Map Unit Polys": mups}, { collapsed: false }).addTo(map);
+
+        mups.on('click', function (e) {
+            // console.log(e);
+            // console.log(e.sourceTarget.properties._symbol);
+            // console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"])
+            console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
+        });
 
     </script>
 </body>
