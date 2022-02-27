@@ -229,57 +229,76 @@
         </div>
     </div>
 
+    <script src="./js/dmu.js"></script>
     <script>
-
         var MapUnitPolysStyles = {};
 
-        $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/resources/styles/root.json?f=pjson", function (data) {
+        $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/resources/styles/root.json?f=pjson", function success(data) {
 
             $.each(data.layers, function (key, val) {
-                MapUnitPolysStyles[key] = {
-                    "id": val.id.replace(val["source-layer"] + "/",""),
-                    "source": val.source,
-                    "source-layer": val["source-layer"],
-                    "fill-color": val.paint["fill-color"],
-                    "fill-outline-color": val.paint["fill-outline-color"],
+
+                const id = val.id.replace(val["source-layer"] + "/", "");
+
+                if (id !== "<all other values>") {
+
+                    const mapUnit = dmu.find((o) => { return o["MapUnit"] === id })
+
+                    MapUnitPolysStyles[key] = {
+                        "id": id,
+                        "source": val.source,
+                        "source-layer": val["source-layer"],
+                        "fill-color": val.paint["fill-color"],
+                        "fill-outline-color": val.paint["fill-outline-color"],
+
+                        "name": mapUnit.Name,
+                        "description": mapUnit.Description,
+                        "rgb": mapUnit.AreaFillRGB,
+                        "age": mapUnit.Age,
+                    }
                 }
+
             });
 
-        });
+            var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                { maxZoom: 16, minZoom: 5, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
 
-        var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            { maxZoom: 16, minZoom: 5, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
+            var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
+                attribution: 'Arizona Geological Survey',
+                vectorTileLayerStyles: {
+                    "Map Unit Polys": function (properties, zoom, geometryDimension) {
+                        return ({
+                            weight: 1,
+                            fillColor: MapUnitPolysStyles[properties._symbol]["fill-color"],
+                            color: MapUnitPolysStyles[properties._symbol]["fill-outline-color"],
+                            fillOpacity: .5,
+                            fill: true
+                        });
+                    }
+                },
+                interactive: true
+            });
 
-        var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
-            attribution: 'Arizona Geological Survey',
-            vectorTileLayerStyles: {
-                "Map Unit Polys": function (properties, zoom, geometryDimension) {
-                    return ({
-                        weight: 1,
-                        fillColor: MapUnitPolysStyles[properties._symbol]["fill-color"],
-                        color: MapUnitPolysStyles[properties._symbol]["fill-outline-color"],
-                        fillOpacity: .5,
-                        fill: true
-                    });
-                }
-            },
-            interactive: true
-        });
+            var map = L.map('map', {
+                center: [32.24, -110.98],
+                zoom: 11,
+                layers: [OpenStreetMap, mups]
+            });
 
-        var map = L.map('map', {
-            center: [32.24, -110.98],
-            zoom: 11,
-            layers: [OpenStreetMap, mups]
-        });
+            L.control.layers({}, { "Map Unit Polys": mups }, { collapsed: false }).addTo(map);
 
-        L.control.layers( {}, { "Map Unit Polys": mups }, { collapsed: false }).addTo(map);
+            mups.on('click', function (e) {
+                console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
 
-        mups.on('click', function (e) {
-            console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
+                var body = `<div><h5>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]}</h5></div>`
+                body += `<div>Age: ${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["age"]}</div>`
+                body += `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
 
-            $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"]);
-            $("#mupModal .modal-header").css( "background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]["fill-color"]);
-            $('#mupModal').modal('show');
+                $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"]);
+                $("#mupModal .modal-body").html(body);
+                $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]["fill-color"]);
+                $('#mupModal').modal('show');
+            });
+
         });
 
     </script>
