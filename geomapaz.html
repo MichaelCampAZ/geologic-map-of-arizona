@@ -9,9 +9,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -19,28 +18,24 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <!-- leaflet -->
+    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
-    <link rel="stylesheet" href="./css/mup.css">
-    <link rel="stylesheet" href="./css/styles.css">
 
-    <!-- topojson -->
-    <script src="./js/topojson.min.js"></script>
-
-    <!-- Fullscreen -->
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
-        rel='stylesheet' />
+    <!-- VectorGrid -->
+    <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
+
+    <link rel="stylesheet" href="./css/mup.css">
+    <link rel="stylesheet" href="./css/styles.css">
 
     <title>Geologic Map of Arizona</title>
 
@@ -215,142 +210,59 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="./data/mup.js"></script>
     <script>
 
-        var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            { maxZoom: 16, minZoom: 5, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
+        var MapUnitPolysStyles = {};
 
-        var mupGeo = topojson.feature(mupTopo, mupTopo.objects['MapUnitPolys (AZ Geology)']);
+        $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/resources/styles/root.json?f=pjson", function (data) {
 
-        function mupStyle(feature) {
-            switch (feature.properties.mapunit) {
-                case 'Q':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#F4F2E6' }
-                case 'QTb':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#F0D5F0' }
-                case 'QTv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E3C4F0' }
-                case 'Qr':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFFFBA' }
-                case 'Qy':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFFFE3' }
-                case 'Qm':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFFFBA' }
-                case 'Qo':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FDFC9B' }
-                case 'QTs':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFE8BA' }
-                case 'Tvy':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFA8FF' }
-                case 'Tsy':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFE8C4' }
-                case 'Tby':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FFBAE3' }
-                case 'Tb':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FF9EE3' }
-                case 'Tsv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FBC47B' }
-                case 'Tsm':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E2B854' }
-                case 'Tv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FDC158' }
-                case 'Tg':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FBBA7B' }
-                case 'Ti':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FD9E69' }
-                case 'TXgn':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FB9AAA' }
-                case 'Tso':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#EED792' }
-                case 'TKgm':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FF8791' }
-                case 'TKg':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#FD7765' }
-                case 'Kv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#D1FF87' }
-                case 'KJo':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BAFF9E' }
-                case 'KJs':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BAFF9E' }
-                case 'Kmv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E8FFA8' }
-                case 'Ks':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B3FB85' }
-                case 'Jm':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#78F077' }
-                case 'Jsv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFB2' }
-                case 'Jg':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#E45FB0' }
-                case 'Jv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFB2' }
-                case 'J^':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B2FFF0' }
-                case '}|':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#81FD80' }
-                case 'Js':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#79E29D' }
-                case 'Jgc':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#6DF1A8' }
-                case '^c':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFD1' }
-                case '^cs':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7DFFD1' }
-                case '^m':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#90DED4' }
-                case '|':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#7BECFB' }
-                case 'P':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#A8F0FF' }
-                case 'P*':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#9ED9FF' }
-                case 'M_':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#C4D9F0' }
-                case 'Ys':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BAB2FF' }
-                case 'Yd':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#D597D0' }
-                case 'YXg':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#D1A177' }
-                case 'Yg':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#CA8B4F' }
-                case 'Xg':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#BA827B' }
-                case 'Xms':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B9C4B9' }
-                case 'Xq':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#92B35F' }
-                case 'Xmv':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#90B388' }
-                case 'Xm':
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#B2B25F' }
-                default:
-                    console.log(`DEFAULT: ` + properties.mapunit);
-                    return { weight: 1, color: '#000', fillOpacity: 0.8, fillColor: '#000000' }
-            }
-        }
+            $.each(data.layers, function (key, val) {
+                MapUnitPolysStyles[key] = {
+                    "id": val.id,
+                    "source": val.source,
+                    "source-layer": val.source - layer,
+                    "fill-color": val.paint["fill-color"],
+                    "fill-outline-color": val.paint["fill-outline-color"],
+                }
+            });
 
-        var MapUnitsPoly = L.geoJSON(mupGeo, { style: mupStyle });
-
-        var map = L.map('map', {
-            center: [34.1618, -111.6211],
-            zoom: 6,
-            layers: [OpenStreetMap, MapUnitsPoly]
         });
 
-        var baseMaps = {
-            "Open Street Map": OpenStreetMap,
-        };
+        var map = L.map('map', {
+            center: [32.24, -110.98],
+            zoom: 11,
+        });
 
-        var overlayMaps = {
-            "Map Unit Polys": MapUnitsPoly
-        };
+        var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            { maxZoom: 16, minZoom: 5, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
 
-        L.control.layers(baseMaps, overlayMaps).addTo(map);
+        var layer = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
+            attribution: 'Arizona Geological Survey',
+            vectorTileLayerStyles: {
+                "Map Unit Polys": function (properties, zoom, geometryDimension) {
+                    return ({
+                        weight: 1,
+                        fillColor: MapUnitPolysStyles[properties._symbol]["fill-color"],
+                        color: MapUnitPolysStyles[properties._symbol]["fill-outline-color"],
+                        fillOpacity: .5,
+                        fill: true
+                    });
+                }
+            },
+            interactive: true
+        }).addTo(map);
 
-        // Fullscreen
-        map.addControl(new L.Control.Fullscreen());
+        layer.on('click', function (e) {
+            // console.log(e);
+            // console.log(e.sourceTarget.properties._symbol);
+            console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"])
+        });
+
+        // CONTROLS
+        // L.control.layers({
+        // 	"OpenStreetMap": OpenStreetMap,
+        // 	"MUPS": layer
+        // }, {}, {collapsed: false}).addTo(map);
 
     </script>
 </body>
