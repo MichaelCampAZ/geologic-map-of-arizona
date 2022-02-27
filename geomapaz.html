@@ -273,7 +273,7 @@
             layers: [OpenStreetMap, mups]
         });
 
-        L.control.layers({ "Street Map": OpenStreetMap }, { "Map Unit Polys": mups }, { collapsed: false }).addTo(map);
+        L.control.layers( {}, { "Map Unit Polys": mups }, { collapsed: false }).addTo(map);
 
         mups.on('click', function (e) {
             console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
