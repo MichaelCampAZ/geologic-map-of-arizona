@@ -237,11 +237,13 @@
 
             $.each(data.layers, function (key, val) {
 
-                const id = val.id.replace(val["source-layer"] + "/", "");
+                var id = val.id.replace(val["source-layer"] + "/", "");
 
                 if (id !== "<all other values>") {
 
-                    const mapUnit = dmu.find((o) => { return o["MapUnit"] === id })
+                    var mapUnit = dmu.find((o) => { return o["MapUnit"] === id })
+
+                    var rgb = "rgb(" + mapUnit.AreaFillRGB.replaceAll(";", ",") + ")";
 
                     MapUnitPolysStyles[key] = {
                         "id": id,
@@ -252,7 +254,7 @@
 
                         "name": mapUnit.Name,
                         "description": mapUnit.Description,
-                        "rgb": mapUnit.AreaFillRGB,
+                        "rgb": rgb,
                         "age": mapUnit.Age,
                     }
                 }
@@ -268,7 +270,7 @@
                     "Map Unit Polys": function (properties, zoom, geometryDimension) {
                         return ({
                             weight: 1,
-                            fillColor: MapUnitPolysStyles[properties._symbol]["fill-color"],
+                            fillColor: MapUnitPolysStyles[properties._symbol]["rgb"],
                             color: MapUnitPolysStyles[properties._symbol]["fill-outline-color"],
                             fillOpacity: .5,
                             fill: true
@@ -289,13 +291,13 @@
             mups.on('click', function (e) {
                 console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
 
-                var body = `<div><h5>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]}</h5></div>`
-                body += `<div>Age: ${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["age"]}</div>`
+                var body = `<div class="font-weight-bold">${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]}</div>`
                 body += `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
 
                 $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"]);
                 $("#mupModal .modal-body").html(body);
-                $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]["fill-color"]);
+                console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol]);
+                $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb']);
                 $('#mupModal').modal('show');
             });
 
