@@ -72,6 +72,26 @@
             </a>
         </div>
         <div id='map'></div>
+
+        <div id="mupModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>lorem ipsum lorem ipsum</p>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
         <div id='legend'>
 
             <!-- <div class="row">
@@ -218,7 +238,7 @@
 
             $.each(data.layers, function (key, val) {
                 MapUnitPolysStyles[key] = {
-                    "id": val.id,
+                    "id": val.id.replace(val["source-layer"] + "/",""),
                     "source": val.source,
                     "source-layer": val["source-layer"],
                     "fill-color": val.paint["fill-color"],
@@ -253,13 +273,14 @@
             layers: [OpenStreetMap, mups]
         });
 
-        L.control.layers({"Street Map": OpenStreetMap}, {"Map Unit Polys": mups}, { collapsed: false }).addTo(map);
+        L.control.layers({ "Street Map": OpenStreetMap }, { "Map Unit Polys": mups }, { collapsed: false }).addTo(map);
 
         mups.on('click', function (e) {
-            // console.log(e);
-            // console.log(e.sourceTarget.properties._symbol);
-            // console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"])
             console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
+
+            $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"]);
+            $("#mupModal .modal-header").css( "background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]["fill-color"]);
+            $('#mupModal').modal('show');
         });
 
     </script>
