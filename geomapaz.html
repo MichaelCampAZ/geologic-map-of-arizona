@@ -289,14 +289,13 @@
             L.control.layers({}, { "Map Unit Polys": mups }, { collapsed: false }).addTo(map);
 
             mups.on('click', function (e) {
-                console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
+                // console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
 
                 var body = `<div class="font-weight-bold">${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]}</div>`
                 body += `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
 
                 $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"]);
                 $("#mupModal .modal-body").html(body);
-                console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol]);
                 $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb']);
                 $('#mupModal').modal('show');
             });
@@ -310,16 +309,20 @@
             };
 
             info.update = function (props) {
-                console.log(props);
                 this._div.innerHTML = (props ? `<h4>${props.id}</h4>` : '');
             };
 
             info.addTo(map);
 
             mups.on('mouseover', function (e) {
-                console.log(e);
+                $('.mupInfo').show();
                 info.update(MapUnitPolysStyles[e.sourceTarget.properties._symbol]);
             });
+
+            // MUPS info show/hide logic
+            map.on('overlayadd', function () { $('.mupInfo').show() });
+            map.on('overlayremove', function () { $('.mupInfo').hide() });
+            map.on('mouseout', function () { $('.mupInfo').hide() });
 
         });
 
