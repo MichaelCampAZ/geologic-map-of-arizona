@@ -301,6 +301,26 @@
                 $('#mupModal').modal('show');
             });
 
+            var info = L.control();
+
+            info.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'mupInfo');
+                this.update();
+                return this._div;
+            };
+
+            info.update = function (props) {
+                console.log(props);
+                this._div.innerHTML = (props ? `<h4>${props.id}</h4>` : '');
+            };
+
+            info.addTo(map);
+
+            mups.on('mouseover', function (e) {
+                console.log(e);
+                info.update(MapUnitPolysStyles[e.sourceTarget.properties._symbol]);
+            });
+
         });
 
     </script>
