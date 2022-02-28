@@ -304,7 +304,7 @@
                 layers: [USGS_USTopo, mups]
             });
 
-            L.control.layers(basemaps, { "Map Unit Polys": mups }, { collapsed: false }).addTo(map);
+            L.control.layers(basemaps, { "Geologic Units": mups }, { collapsed: false }).addTo(map);
 
             mups.on('click', function (e) {
                 // console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
