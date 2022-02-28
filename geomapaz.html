@@ -309,10 +309,9 @@
             mups.on('click', function (e) {
                 // console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
 
-                var body = `<div class="font-weight-bold">${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]}</div>`
-                body += `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
+                var body = `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
 
-                $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["id"]);
+                $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]);
                 $("#mupModal .modal-body").html(body);
                 $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb']);
                 $('#mupModal').modal('show');
@@ -327,7 +326,7 @@
             };
 
             info.update = function (props) {
-                this._div.innerHTML = (props ? `<h4>${props.id}</h4>` : '');
+                this._div.innerHTML = (props ? `<div style='max-width: 150px;' class='font-weight-bold'>${props.name}</div>` : '');
             };
 
             info.addTo(map);
