@@ -22,3 +22,12 @@ body {
   border-width: 2px;
   text-align: center;
 }
+
+.mupInfo {
+  background-color: #fff;
+  border: 2px solid rgba(0,0,0,0.2);
+  background-clip: padding-box;
+  padding: 6px 10px 6px 6px;
+  border-radius: 5px;
+  max-width: 150px;
+}

@@ -327,13 +327,13 @@
             var info = L.control();
 
             info.onAdd = function (map) {
-                this._div = L.DomUtil.create('div', 'border border-secondary rounded p-1 bg-light mupInfo');
+                this._div = L.DomUtil.create('div', 'mupInfo');
                 this.update();
                 return this._div;
             };
 
             info.update = function (props) {
-                this._div.innerHTML = (props ? `<div style='max-width: 150px;'>${props.name}</div>` : '');
+                this._div.innerHTML = (props ? `<div>${props.name}</div>` : '');
             };
 
             info.addTo(map);
@@ -346,7 +346,7 @@
             // MUPS info show/hide logic
             map.on('overlayadd', function () { $('.mupInfo').show() });
             map.on('overlayremove', function () { $('.mupInfo').hide() });
-            map.on('mouseout', function () { $('.mupInfo').hide() });
+            mups.on('mouseout', function () { $('.mupInfo').hide() });
 
             L.control.scale().addTo(map);
 
