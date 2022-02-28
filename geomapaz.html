@@ -326,13 +326,13 @@
             var info = L.control();
 
             info.onAdd = function (map) {
-                this._div = L.DomUtil.create('div', 'mupInfo');
+                this._div = L.DomUtil.create('div', 'border border-secondary rounded p-1 bg-light mupInfo');
                 this.update();
                 return this._div;
             };
 
             info.update = function (props) {
-                this._div.innerHTML = (props ? `<div style='max-width: 150px;' class='font-weight-bold'>${props.name}</div>` : '');
+                this._div.innerHTML = (props ? `<div style='max-width: 150px;'>${props.name}</div>` : '');
             };
 
             info.addTo(map);
