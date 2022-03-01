@@ -316,12 +316,16 @@
             mups.on('click', function (e) {
                 // console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
 
-                var body = `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
+                var info =  `<div class='border border-dark font-weight-bold p-3' style='background-color:${MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb']}'>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]}</div>`
+                info += `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
+                var pop = L.popup().setLatLng(e.latlng).setContent(info).openOn(map);
 
-                $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]);
-                $("#mupModal .modal-body").html(body);
-                $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb']);
-                $('#mupModal').modal('show');
+                // BOOTSTRAP MODAL 
+                // var body = `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
+                // $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]);
+                // $("#mupModal .modal-body").html(body);
+                // $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb']);
+                // $('#mupModal').modal('show');
             });
 
             var info = L.control();
