@@ -100,7 +100,9 @@
         </div>
 
         <div id='legend'>
-
+            <div class="alert alert-primary mt-5" role="alert">
+                Still working on the static legend.. 
+              </div>
             <!-- <div class="row">
                 <div class="col-md-4">
                     <div class="card">
@@ -304,10 +306,11 @@
             }
 
             var map = L.map('map', {
-                center: [32.24, -110.98],
+                center: [34.16,-111.62],
+                maxBounds: L.latLngBounds([[29.96818929679422,-126.13671875],[38.34395908944491,-97.226318359375]]),
                 maxZoom: 13,
-                minZoom: 7,
-                zoom: 10,
+                minZoom: 6,
+                zoom: 7,
                 layers: [USGS_USTopo, mups]
             });
 
