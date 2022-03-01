@@ -311,7 +311,7 @@
                 layers: [USGS_USTopo, mups]
             });
 
-            L.control.layers(basemaps, { "Geologic Units": mups }, { collapsed: false }).addTo(map);
+            var layerControl = L.control.layers(basemaps, { "Geologic Units": mups }, { collapsed: false }).addTo(map);
 
             mups.on('click', function (e) {
                 // console.log(MapUnitPolysStyles[e.sourceTarget.properties._symbol])
@@ -338,6 +338,9 @@
 
             info.addTo(map);
 
+            // TODO - find a better way to start hidden
+            $('.mupInfo').hide();
+
             mups.on('mouseover', function (e) {
                 $('.mupInfo').show();
                 info.update(MapUnitPolysStyles[e.sourceTarget.properties._symbol]);
@@ -350,7 +353,26 @@
 
             L.control.scale().addTo(map);
 
+            // AZGS Datasets
+            $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true", function success(data) {
+
+                function onEachFeature(feature, layer) {
+                    if (feature.properties && feature.properties.abstract) {
+                        layer.bindPopup(feature.properties.abstract + "<br/><br/><b>TODO: format and add links</b>");
+                    }
+                }
+
+                var azgsMaps = L.geoJSON(data, {
+                    onEachFeature: onEachFeature
+                });
+
+                layerControl.addOverlay(azgsMaps, "AZGS Datasets");
+            });
+
         });
+
+
+
 
     </script>
 </body>
