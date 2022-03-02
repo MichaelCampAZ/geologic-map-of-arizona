@@ -332,10 +332,11 @@
                 $('#mupModal').modal('show');
             });
 
+            // MUPs info box
             var info = L.control();
 
             info.onAdd = function (map) {
-                this._div = L.DomUtil.create('div', 'mupInfo');
+                this._div = L.DomUtil.create('div', 'mupInfo invisible');
                 this.update();
                 return this._div;
             };
@@ -346,18 +347,16 @@
 
             info.addTo(map);
 
-            // TODO - find a better way to start hidden
-            $('.mupInfo').hide();
-
+            // Update MUPs info box on mouseover
             mups.on('mouseover', function (e) {
-                $('.mupInfo').show();
+                $('.mupInfo').removeClass("invisible")
                 info.update(MapUnitPolysStyles[e.sourceTarget.properties._symbol]);
             });
 
-            // MUPS info show/hide logic
-            map.on('overlayadd', function () { $('.mupInfo').show() });
-            map.on('overlayremove', function () { $('.mupInfo').hide() });
-            mups.on('mouseout', function () { $('.mupInfo').hide() });
+            // MUPS info box show/hide logic
+            map.on('overlayadd', function () { $('.mupInfo').removeClass("invisible") });
+            map.on('overlayremove', function () { $('.mupInfo').addClass("invisible") });
+            mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
 
             L.control.scale().addTo(map);
 
