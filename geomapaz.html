@@ -29,6 +29,9 @@
     <!-- VectorGrid -->
     <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
 
+    <!-- Leaflet.pip -->
+    <script src="https://unpkg.com/@mapbox/leaflet-pip@latest/leaflet-pip.js"></script>
+
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
@@ -363,17 +366,31 @@
             // AZGS Datasets
             $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=200", function success(data) {
 
-                function onEachFeature(feature, layer) {
-                    if (feature.properties && feature.properties.abstract) {
-                        layer.bindPopup(feature.properties.abstract + "<br/><br/><b>TODO: format and add links</b>");
-                    }
+                function onAzgsClick(e) {
+                    var features = leafletPip.pointInLayer(e.latlng, azgsMaps);
+                    var bodyHtml = "<div>";
+
+                    features.forEach((polygon) => {
+                        console.log(polygon.feature.properties);
+                        bodyHtml += `<b>${polygon.feature.properties.title} (${polygon.feature.properties.year})</b><br/>`;
+                        bodyHtml += '</p >';
+                    });
+
+                    bodyHtml += "TODO: format & links</div>";
+
+                    $("#mupModal .modal-title").text(`${features.length} AZGS Datasets`);
+                    $("#mupModal .modal-body").html(bodyHtml);
+                    $("#mupModal .modal-header").css("background-color", "#D3D3D3");
+                    $('#mupModal').modal('show');
+
                 }
 
-                var azgsMaps = L.geoJSON(data, {
-                    onEachFeature: onEachFeature
-                });
+                var azgsMaps = L.geoJSON(data);
+
+                azgsMaps.on('click', onAzgsClick);
 
                 layerControl.addOverlay(azgsMaps, "AZGS Datasets");
+
             });
 
         });
