@@ -101,8 +101,8 @@
 
         <div id='legend'>
             <div class="alert alert-primary mt-5" role="alert">
-                Still working on the static legend.. 
-              </div>
+                Still working on the static legend..
+            </div>
             <!-- <div class="row">
                 <div class="col-md-4">
                     <div class="card">
@@ -241,6 +241,15 @@
 
     <script src="./js/dmu.js"></script>
     <script>
+
+        var map = L.map('map', {
+            center: [34.16, -111.62],
+            maxBounds: L.latLngBounds([[29.96818929679422, -126.13671875], [38.34395908944491, -97.226318359375]]),
+            maxZoom: 13,
+            minZoom: 6,
+            zoom: 7,
+        });
+
         var MapUnitPolysStyles = {};
 
         $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/resources/styles/root.json?f=pjson", function success(data) {
@@ -273,7 +282,7 @@
 
             var USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
                 attribution: '<a href="https://usgs.gov/">U.S. Geological Survey</a>'
-            });
+            }).addTo(map);
 
             var USGS_USImageryTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
                 attribution: '<a href="https://usgs.gov/">U.S. Geological Survey</a>'
@@ -297,22 +306,13 @@
                     }
                 },
                 interactive: true
-            });
+            }).addTo(map);;
 
             var basemaps = {
                 "USGS Topo": USGS_USTopo,
                 "USGS Imagery Topo": USGS_USImageryTopo,
                 "Open Street Map": OpenStreetMap
             }
-
-            var map = L.map('map', {
-                center: [34.16,-111.62],
-                maxBounds: L.latLngBounds([[29.96818929679422,-126.13671875],[38.34395908944491,-97.226318359375]]),
-                maxZoom: 13,
-                minZoom: 6,
-                zoom: 7,
-                layers: [USGS_USTopo, mups]
-            });
 
             var layerControl = L.control.layers(basemaps, { "Geologic Units": mups }, { collapsed: false }).addTo(map);
 
@@ -377,9 +377,6 @@
             });
 
         });
-
-
-
 
     </script>
 </body>
