@@ -295,14 +295,19 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             });
 
+            // Map Unit Poly vectorGrid layer
             var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
                 attribution: '<a href="https://www.azgs.arizona.edu/">Arizona Geological Survey</a>',
                 vectorTileLayerStyles: {
                     "Map Unit Polys": function (properties, zoom, geometryDimension) {
+
+                        var rgb = MapUnitPolysStyles[properties._symbol]["rgb"];
+                        var outlineColor = MapUnitPolysStyles[properties._symbol]["fill-outline-color"];
+
                         return ({
                             weight: 1,
-                            fillColor: MapUnitPolysStyles[properties._symbol]["rgb"],
-                            color: MapUnitPolysStyles[properties._symbol]["fill-outline-color"],
+                            fillColor: rgb,
+                            color: outlineColor,
                             fillOpacity: .5,
                             fill: true
                         });
@@ -311,12 +316,14 @@
                 interactive: true
             }).addTo(map);;
 
+            // Basemap layer group
             var basemaps = {
                 "USGS Topo": USGS_USTopo,
                 "USGS Imagery Topo": USGS_USImageryTopo,
                 "Open Street Map": OpenStreetMap
             }
 
+            // Add uncollapsed layer controller to the map.
             var layerControl = L.control.layers(basemaps, { "Geologic Units": mups }, { collapsed: false }).addTo(map);
 
             mups.on('click', function (e) {
@@ -327,23 +334,29 @@
                 // info += `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
                 // var pop = L.popup().setLatLng(e.latlng).setContent(info).openOn(map);
 
+                var rgb = MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb'];
+                var name = MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"];
+                var description = MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"];
+
                 // BOOTSTRAP MODAL 
-                var body = `<p>${MapUnitPolysStyles[e.sourceTarget.properties._symbol]["description"]}</p>`
-                $("#mupModal .modal-title").text(MapUnitPolysStyles[e.sourceTarget.properties._symbol]["name"]);
+                var body = `<p>${description}</p>`
+                $("#mupModal .modal-title").text(name);
                 $("#mupModal .modal-body").html(body);
-                $("#mupModal .modal-header").css("background-color", MapUnitPolysStyles[e.sourceTarget.properties._symbol]['rgb']);
+                $("#mupModal .modal-header").css("background-color", rgb);
                 $('#mupModal').modal('show');
             });
 
             // MUPs info box
             var info = L.control();
 
+            // Setup html and update function for the info box
             info.onAdd = function (map) {
                 this._div = L.DomUtil.create('div', 'mupInfo invisible');
                 this.update();
                 return this._div;
             };
 
+            // Update html function for Mups info box
             info.update = function (props) {
                 this._div.innerHTML = (props ? `<div>${props.name}</div>` : '');
             };
@@ -356,9 +369,7 @@
                 info.update(MapUnitPolysStyles[e.sourceTarget.properties._symbol]);
             });
 
-            // MUPS info box show/hide logic
-            map.on('overlayadd', function () { $('.mupInfo').removeClass("invisible") });
-            map.on('overlayremove', function () { $('.mupInfo').addClass("invisible") });
+            // Hide the MUPs info box on mouse out of the mup layer
             mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
 
             L.control.scale().addTo(map);
@@ -371,7 +382,7 @@
                     var bodyHtml = "<div>";
 
                     features.forEach((polygon) => {
-                        console.log(polygon.feature.properties);
+                        // console.log(polygon.feature.properties);
                         bodyHtml += `<b>${polygon.feature.properties.title} (${polygon.feature.properties.year})</b><br/>`;
                         bodyHtml += '</p >';
                     });
