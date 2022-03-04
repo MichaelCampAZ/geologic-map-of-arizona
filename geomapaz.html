@@ -378,7 +378,7 @@
             L.control.scale().addTo(map);
 
             // AZGS Datasets
-            $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=200", function success(data) {
+            $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=500", function success(data) {
 
                 function onAzgsClick(e) {
                     var features = leafletPip.pointInLayer(e.latlng, azgsMaps);
