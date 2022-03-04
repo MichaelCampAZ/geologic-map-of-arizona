@@ -382,7 +382,7 @@
                     var bodyHtml = "<div>";
 
                     features.forEach((polygon) => {
-                        // console.log(polygon.feature.properties);
+                        console.log(polygon.feature.properties);
                         bodyHtml += `<b>${polygon.feature.properties.title} (${polygon.feature.properties.year})</b><br/>`;
                         bodyHtml += '</p >';
                     });
@@ -396,7 +396,18 @@
 
                 }
 
-                var azgsMaps = L.geoJSON(data);
+                var azgsMaps = L.geoJSON(data, {
+                    style: function (feature) {
+                        // Make the Map of AZ transparent so it isn't annoying
+                        if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
+                            return { fillOpacity: 0, opacity: 0 };
+                        } else {
+                            // Random color fill
+                            return { fillColor: "#" + ((1 << 24) * Math.random() | 0).toString(16) };
+
+                        }
+                    }
+                });
 
                 azgsMaps.on('click', onAzgsClick);
 
