@@ -245,8 +245,8 @@
     <script src="./js/dmu.js"></script>
     <script>
 
-        // Set zoom level at 6 for smaller screens
-        var zoomLevel = screen.width < 500 ? 6 : 7;
+        // Set zoom level at 6 for mobile screens
+        var zoomLevel = L.Browser.mobile ? 6 : 7;
 
         // Map init
         var map = L.map('map', {
