@@ -383,44 +383,42 @@
 
             // Hide the MUPs info box on mouse out of the mup layer
             mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
-        });
 
-        var ContactsFaultsSymbol = {};
+            // Contacts and Faults
+            var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsLines/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
+                attribution: 'cf',
+                vectorTileLayerStyles: {
+                    "ContactsFaults": function (properties, zoom, geometryDimension) {
+                        var cf_symbol = properties._symbol;
 
-        // Contacts and Faults
-        var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsLines/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
-            attribution: 'cf',
-            vectorTileLayerStyles: {
-                "ContactsFaults": function (properties, zoom, geometryDimension) {
-                    var cf_symbol = properties._symbol;
+                        switch (cf_symbol) {
+                            case 0:
+                                // 1.1.1
+                                return ({ weight: 1, color: "#a50d0d", });
+                            case 1:
+                                // 2.1.1
+                                return ({ weight: 1, color: "#1d0da5", });
+                            case 2:
+                                // 2.10.1
+                                return ({ weight: 1, color: "#a50d57", });
+                            case 3:
+                                // 2.10.33
+                                return ({ weight: 1, color: "#0da526", });
+                            case 4:
+                                // 2.8.1
+                                return ({ weight: 1, color: "#7ba50d", });
+                            default:
+                                console.log("Missing Symbol: " + cf_symbol);
+                                return ({ weight: 1, color: "#000", });
+                        }
 
-                    switch (cf_symbol) {
-                        case 0:
-                            // 1.1.1
-                            return ({ weight: 1, color: "#a50d0d", });
-                        case 1:
-                            // 2.1.1
-                            return ({ weight: 1, color: "#1d0da5", });
-                        case 2:
-                            // 2.10.1
-                            return ({ weight: 1, color: "#a50d57", });
-                        case 3:
-                            // 2.10.33
-                            return ({ weight: 1, color: "#0da526", });
-                        case 4:
-                            // 2.8.1
-                            return ({ weight: 1, color: "#7ba50d", });
-                        default:
-                            console.log("Missing Symbol: " + cf_symbol);
-                            return ({ weight: 1, color: "#000", });
                     }
+                },
+                interactive: true
+            }).addTo(map);;
 
-                }
-            },
-            interactive: true
-        }).addTo(map);;
-
-        layerControl.addOverlay(cf, "Geologic Faults");
+            layerControl.addOverlay(cf, "Faults");
+        });
 
         // AZGS Datasets
         $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=500", function success(data) {
