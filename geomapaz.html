@@ -397,22 +397,22 @@
                     switch (cf_symbol) {
                         case 0:
                             // 1.1.1
-                            return ({weight: 1, color: "#a50d0d",});
+                            return ({ weight: 1, color: "#a50d0d", });
                         case 1:
                             // 2.1.1
-                            return ({weight: 1, color: "#1d0da5",});
+                            return ({ weight: 1, color: "#1d0da5", });
                         case 2:
                             // 2.10.1
-                            return ({weight: 1, color: "#a50d57",});
+                            return ({ weight: 1, color: "#a50d57", });
                         case 3:
                             // 2.10.33
-                            return ({weight: 1, color: "#0da526",});
+                            return ({ weight: 1, color: "#0da526", });
                         case 4:
                             // 2.8.1
-                            return ({weight: 1, color: "#7ba50d",});
+                            return ({ weight: 1, color: "#7ba50d", });
                         default:
                             console.log("Missing Symbol: " + cf_symbol);
-                            return ({weight: 1, color: "#000",});
+                            return ({ weight: 1, color: "#000", });
                     }
 
                 }
@@ -445,14 +445,16 @@
             }
 
             var azgsMaps = L.geoJSON(data, {
-                style: function (feature) {
-                    // Make the Map of AZ transparent so it isn't annoying
+                filter: function (feature) {
+                    // Remove the big datasets
                     if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
-                        return { fillOpacity: 0, opacity: 0 };
-                    } else {
-                        // Random color fill
-                        return { color: "#1E5288", fillColor: "#" + ((1 << 24) * Math.random() | 0).toString(16) };
+                        return false;
                     }
+
+                    return true;
+                },
+                style: function (feature) {
+                    return { color: "#1E5288", fillColor: "#" + ((1 << 24) * Math.random() | 0).toString(16) };
                 }
             });
 
