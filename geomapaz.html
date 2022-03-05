@@ -280,7 +280,7 @@
         }
 
         // Add uncollapsed layer controller to the map.
-        var layerControl = L.control.layers(basemaps, {}, { collapsed: false }).addTo(map);
+        var layerControl = L.control.layers(basemaps, {}, { collapsed: false, sort: true }).addTo(map);
 
         // Add scale bar
         L.control.scale().addTo(map);
