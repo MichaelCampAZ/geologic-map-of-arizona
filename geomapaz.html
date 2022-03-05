@@ -385,33 +385,26 @@
             mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
         });
 
+        var ContactsFaultsSymbol = {};
+
         // Contacts and Faults
-        // https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsTest/VectorTileServer
-        $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsTest/VectorTileServer/resources/styles/root.json?f=pjson", function success(data) {
-            // console.log("Contacts Faults");
-            // console.log(data);
+        var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsLines/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
+            attribution: 'cf',
+            vectorTileLayerStyles: {
+                "ContactsFaults": function (properties, zoom, geometryDimension) {
+                    var cf_symbol = properties._symbol;
+                    console.log(cf_symbol);
 
-            var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsTest/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
-                attribution: 'cf',
-                vectorTileLayerStyles: {
-                    "ContactsFaults" : function (properties, zoom, geometryDimension) {
+                    return ({
+                        weight: 1,
+                        color: "#000",
+                    });
+                }
+            },
+            interactive: true
+        }).addTo(map);;
 
-                        // var rgb = MapUnitPolysStyles[properties._symbol]["rgb"];
-                        // var outlineColor = MapUnitPolysStyles[properties._symbol]["fill-outline-color"];
-
-                        return ({
-                            weight: 1,
-                            color: "#000",
-                            fillOpacity: .5,
-                        });
-                    }
-                },
-                interactive: true
-            }).addTo(map);;
-
-            layerControl.addOverlay(cf, "Geologic Faults");
-
-        });
+        layerControl.addOverlay(cf, "Geologic Faults");
 
         // AZGS Datasets
         $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=500", function success(data) {
