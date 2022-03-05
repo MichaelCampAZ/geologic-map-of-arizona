@@ -280,8 +280,10 @@
         }
 
         // Add uncollapsed layer controller to the map.
-        // var layerControl = L.control.layers(basemaps, { "Geologic Units": mups }, { collapsed: false }).addTo(map);
         var layerControl = L.control.layers(basemaps, { }, { collapsed: false }).addTo(map);
+
+        // Add scale bar
+        L.control.scale().addTo(map);
 
         var MapUnitPolysStyles = {};
 
@@ -381,9 +383,6 @@
 
             // Hide the MUPs info box on mouse out of the mup layer
             mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
-
-            L.control.scale().addTo(map);
-
         });
 
         // AZGS Datasets
