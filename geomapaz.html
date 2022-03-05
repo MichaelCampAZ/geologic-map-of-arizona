@@ -280,7 +280,7 @@
         }
 
         // Add uncollapsed layer controller to the map.
-        var layerControl = L.control.layers(basemaps, {}, { collapsed: false, sort: true }).addTo(map);
+        var layerControl = L.control.layers(basemaps, {}, { collapsed: false, autoZIndex: false }).addTo(map);
 
         // Add scale bar
         L.control.scale().addTo(map);
@@ -393,12 +393,28 @@
             vectorTileLayerStyles: {
                 "ContactsFaults": function (properties, zoom, geometryDimension) {
                     var cf_symbol = properties._symbol;
-                    console.log(cf_symbol);
 
-                    return ({
-                        weight: 1,
-                        color: "#000",
-                    });
+                    switch (cf_symbol) {
+                        case 0:
+                            // 1.1.1
+                            return ({weight: 1, color: "#a50d0d",});
+                        case 1:
+                            // 2.1.1
+                            return ({weight: 1, color: "#1d0da5",});
+                        case 2:
+                            // 2.10.1
+                            return ({weight: 1, color: "#a50d57",});
+                        case 3:
+                            // 2.10.33
+                            return ({weight: 1, color: "#0da526",});
+                        case 4:
+                            // 2.8.1
+                            return ({weight: 1, color: "#7ba50d",});
+                        default:
+                            console.log("Missing Symbol: " + cf_symbol);
+                            return ({weight: 1, color: "#000",});
+                    }
+
                 }
             },
             interactive: true
