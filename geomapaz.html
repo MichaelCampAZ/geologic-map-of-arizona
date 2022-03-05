@@ -280,7 +280,7 @@
         }
 
         // Add uncollapsed layer controller to the map.
-        var layerControl = L.control.layers(basemaps, { }, { collapsed: false }).addTo(map);
+        var layerControl = L.control.layers(basemaps, {}, { collapsed: false }).addTo(map);
 
         // Add scale bar
         L.control.scale().addTo(map);
@@ -383,6 +383,34 @@
 
             // Hide the MUPs info box on mouse out of the mup layer
             mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
+        });
+
+        // Contacts and Faults
+        // https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsTest/VectorTileServer
+        $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsTest/VectorTileServer/resources/styles/root.json?f=pjson", function success(data) {
+            // console.log("Contacts Faults");
+            // console.log(data);
+
+            var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsTest/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
+                attribution: 'cf',
+                vectorTileLayerStyles: {
+                    "ContactsFaults" : function (properties, zoom, geometryDimension) {
+
+                        // var rgb = MapUnitPolysStyles[properties._symbol]["rgb"];
+                        // var outlineColor = MapUnitPolysStyles[properties._symbol]["fill-outline-color"];
+
+                        return ({
+                            weight: 1,
+                            color: "#000",
+                            fillOpacity: .5,
+                        });
+                    }
+                },
+                interactive: true
+            }).addTo(map);;
+
+            layerControl.addOverlay(cf, "Geologic Faults");
+
         });
 
         // AZGS Datasets
