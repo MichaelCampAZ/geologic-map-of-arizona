@@ -352,13 +352,14 @@
 
             var rowNumber = Math.floor(index / 3);
 
-            $(`#MupLegendRow${rowNumber}`).append(`<div class="col-md-4">
+            $(`#MupLegendRow${rowNumber}`).append(`<div class="col-md-4 p-2">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-img-top p-3" style="background-color:${value.rgb};></h5>
-                        <span class="card-title">${value.fullname}</span>
-                        <h6 class="card-subtitle mb-2 text-muted">${value.age}</h6>
-                        <p class="card-text">${value.description}</p>
+                        <div class="p-1" style="background-color:${value.rgb};">
+                            <h5 class="card-title p-3">${value.fullname}</h5>
+                            <h6 class="card-subtitle text-dark text-right pb-1 pr-1">${value.age}</h6>
+                        </div>
+                        <div class="card-text">${value.description}</div>
                     </div>
                 </div>
             </div>`)
