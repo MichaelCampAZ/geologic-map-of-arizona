@@ -91,7 +91,7 @@ const dmu = [
     MapUnit: "Tb",
     FullName: "LATE TO MIDDLE MIOCENE BASALTIC ROCKS (8-16 Ma)",
     Age: "Late to Middle Miocene",
-    Description: "Mostly dark, mesa-forming basalt deposited as lava flows. Rocks of this unit are widely exposed south of Camp Verde (Hickey Formation basalts), in the Mohon Mountains north of Bagdad, \"The Mesa\" east of Parker, and at other scattered locations in western Arizona. Rocks of this unit were not tilted by middle-Tertiary normal faulting except in a narrow belt from north of Phoenix to the northwest corner of the state.,
+    Description: "Mostly dark, mesa-forming basalt deposited as lava flows. Rocks of this unit are widely exposed south of Camp Verde (Hickey Formation basalts), in the Mohon Mountains north of Bagdad, \"The Mesa\" east of Parker, and at other scattered locations in western Arizona. Rocks of this unit were not tilted by middle-Tertiary normal faulting except in a narrow belt from north of Phoenix to the northwest corner of the state.",
     Symbol: "",
     AreaFillRGB: "255;158;227"
   },
@@ -147,7 +147,7 @@ const dmu = [
     MapUnit: "Tso",
     FullName: "OLIGOCENE TO PALEOCENE[?] SEDIMENTARY ROCKS (30-65 Ma)",
     Age: "Oligocene to Paleocene",
-    Description: "Light colored, weakly to moderately consolidated conglomerate and sandstone deposited largely or entirely before mid-Tertiary volcanism and extensional faulting. Most sediment was deposited by early Cenozoic streams that flowed northeastward onto the Colorado Plateau from areas to the southwest that are now lower in elevation than the Plateau. Sediments of this map unit, other than the Chuska Sandstone in northeasternmost Arizona, are commonly referred to as \"rim gravels\" because they now rest on or near the Mogollon Rim, which is the southwestern edge of the Colorado Plateau.,
+    Description: "Light colored, weakly to moderately consolidated conglomerate and sandstone deposited largely or entirely before mid-Tertiary volcanism and extensional faulting. Most sediment was deposited by early Cenozoic streams that flowed northeastward onto the Colorado Plateau from areas to the southwest that are now lower in elevation than the Plateau. Sediments of this map unit, other than the Chuska Sandstone in northeasternmost Arizona, are commonly referred to as \"rim gravels\" because they now rest on or near the Mogollon Rim, which is the southwestern edge of the Colorado Plateau.",
     Symbol: "",
     AreaFillRGB: "238;215;146"
   },
@@ -240,7 +240,7 @@ const dmu = [
     AreaFillRGB: "125;255;178"
   },
   {
-    MapUnit: "J\ufffd,
+    MapUnit: "J²",
     FullName: "JURASSIC AND TRIASSIC SEDIMENTARY AND VOLCANIC ROCKS (160-240 Ma)",
     Age: "Jurassic to Triassic",
     Description: "Undivided massive quartz-feldspar porphyry of the Jurassic Planet Volcanics, quartz-rich metasandstone of the Jurassic Vampire Formation, and quartzite, phyllite, and fine grained, variably calcareous metasiltstone of the Triassic Buckskin Formation; exposed primarily in the Buckskin and Rawhide Mountains of western Arizona. This unit also includes sandstone and conglomerate beneath Jurassic volcanic rocks in the central Dome Rock Mountains.",
@@ -251,7 +251,7 @@ const dmu = [
     MapUnit: "JCm",
     FullName: "JURASSIC TO CAMBRIAN METAMORPHOSED SEDIMENTARY ROCKS (160-540 Ma)",
     Age: "Jurassic to Cambrian",
-    Description: "Highly faulted and folded rocks of units Jv, J\ufffd, and Pz, deformed and metamorphosed in Jurassic, Cretaceous and Tertiary time. This unit is restricted to west-central Arizona.,
+    Description: "Highly faulted and folded rocks of units Jv, J², and Pz, deformed and metamorphosed in Jurassic, Cretaceous and Tertiary time. This unit is restricted to west-central Arizona.",
     Symbol: "",
     AreaFillRGB: "129;253;128"
   },
@@ -272,7 +272,7 @@ const dmu = [
     AreaFillRGB: "109;241;168"
   },
   {
-    MapUnit: "\ufffdc,
+    MapUnit: "²c",
     FullName: "CHINLE FORMATION (Late Triassic, 210-230 Ma)",
     Age: "Late Triassic",
     Description: "Colorful mudstone, such as in the Painted Desert, and less abundant lenses of sandstone and conglomerate, deposited by a large river system. This unit typically is eroded into badlands topography and contains clays that are prone to shrinking and swelling.",
@@ -280,7 +280,7 @@ const dmu = [
     AreaFillRGB: "125;255;209"
   },
   {
-    MapUnit: "\ufffdcs,
+    MapUnit: "²cs",
     FullName: "SHINARUMP CONGLOMERATE MEMBER",
     Age: "Triassic",
     Description: "Basal conglomerate and pebbly sandstone of the Chinle Formation is relatively resistant to erosion and forms extensive benches in some parts of the Colorado Plateau.",
@@ -288,7 +288,7 @@ const dmu = [
     AreaFillRGB: "125;255;209"
   },
   {
-    MapUnit: "\ufffdm,
+    MapUnit: "²m",
     FullName: "MOENKOPI FORMATION (Middle(?) and Early Triassic, 230-245 Ma)",
     Age: "Middle to Early Triassic",
     Description: "Dark red sandstone and mudstone; includes gypsum beds in northwestern Arizona; deposited on a low-relief coastal plain.",
@@ -312,7 +312,7 @@ const dmu = [
     AreaFillRGB: "168;240;255"
   },
   {
-    MapUnit: "P\ufffd,
+    MapUnit: "P³",
     FullName: "PERMIAN TO PENNSYLVANIAN SEDIMENTARY ROCKS (280-310 Ma)",
     Age: "Permian to Pennsylvanian",
     Description: "Interbedded sandstone, shale, and limestone usually characterized by ledgy outcrops. Orange to reddish sandstone forms cliffs near Sedona. This unit includes Supai Group and Hermit Shale in northern Arizona and Naco Group in southern Arizona. It was deposited in coastal-plain to shallow-marine settings during time of variable and changing sea level. Rocks of this map unit in southern Arizona may be in part equivalent to Permian rocks of map unit P in central and northern Arizona.",
@@ -320,7 +320,7 @@ const dmu = [
     AreaFillRGB: "158;217;255"
   },
   {
-    MapUnit: "M\ufffd,
+    MapUnit: "Mº",
     FullName: "MISSISSIPPIAN, DEVONIAN, AND CAMBRIAN SEDIMENTARY ROCKS (330-540 Ma)",
     Age: "Mississippian to Cambrian",
     Description: "Brown to dark gray sandstone grades upward into green and gray shale, overlain by light to medium gray or tan limestone and dolostone. This unit includes the Tapeats Sandstone, Bright Angel Shale, Muav Limestone, Temple Butte Formation and Redwall Limestone in northern Arizona, and the Bolsa Quartzite, Abrigo Formation, Martin Formation, and Escabrosa Limestone in southern Arizona. These rocks record intermittent sea-level rise and inundation in early Paleozoic time.",
@@ -505,9 +505,9 @@ const dmu = [
   },
   {
     MapUnit: "W",
-    FullName: "water (Holocene)",
+    FullName: "Water",
     Age: "Holocene",
-    Description: " ",
+    Description: "Water",
     Symbol: "",
     AreaFillRGB: "0;128;255"
   }
