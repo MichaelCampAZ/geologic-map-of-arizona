@@ -92,6 +92,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <h6 class="modal-age text-dark text-right pb-1 pr-1"></h6>
                     <div class="modal-body">
                     </div>
                 </div>
@@ -285,10 +286,12 @@
             var rgb = MapUnit.rgb;
             var fullname = MapUnit.fullname;
             var description = MapUnit.description;
+            var age = MapUnit.age;
 
             // BOOTSTRAP MODAL 
             var body = `<p>${description}</p>`
             $("#Modal .modal-title").text(fullname);
+            $("#Modal .modal-age").text(age);
             $("#Modal .modal-body").html(body);
             $("#Modal .modal-header").css("background-color", rgb);
             $('#Modal').modal('show');
@@ -371,7 +374,7 @@
             var popupContent;
 
             switch (symbol) {
-                case 0:case 1:
+                case 0: case 1:
                     popupContent = 'Detachment fault'
                     break;
                 case 2:
@@ -415,6 +418,7 @@
                 bodyHtml += "TODO: format & links</div>";
 
                 $("#Modal .modal-title").text(`${features.length} AZGS Datasets`);
+                $("#Modal .modal-age").text("");
                 $("#Modal .modal-body").html(bodyHtml);
                 $("#Modal .modal-header").css("background-color", "#D3D3D3");
                 $('#Modal').modal('show');
