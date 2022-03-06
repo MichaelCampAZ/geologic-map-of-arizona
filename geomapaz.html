@@ -328,7 +328,7 @@
 
         // Contacts and Faults
         var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsAndFaultsGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
-            attribution: 'cf',
+            attribution: '<a href="https://www.azgs.arizona.edu/">AZGS</a>',
             vectorTileLayerStyles: {
                 "ContactsAndFaults": function (properties, zoom, geometryDimension) {
                     var symbol = properties._symbol;
@@ -428,6 +428,7 @@
             }
 
             var azgsMaps = L.geoJSON(data, {
+                attribution: '<a href="https://www.azgs.arizona.edu/">AZGS</a>',
                 filter: function (feature) {
                     // Remove the big datasets
                     if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
