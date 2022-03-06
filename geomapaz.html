@@ -221,10 +221,10 @@
                     var rgb = "rgb(" + mapUnit.AreaFillRGB.replaceAll(";", ",") + ")";
 
                     MapUnitPolysStyles[key] = {
-                        "id": id,
-                        "source": val.source,
-                        "source-layer": val["source-layer"],
-                        "fill-color": val.paint["fill-color"],
+                        "MapUnit": id,
+                        //"source": val.source,
+                        //"source-layer": val["source-layer"],
+                        //"fill-color": val.paint["fill-color"],
                         "fill-outline-color": val.paint["fill-outline-color"],
 
                         "name": mapUnit.Name,
@@ -245,12 +245,11 @@
                     "MapUnitPolys": function (properties, zoom, geometryDimension) {
 
                         var rgb = MapUnitPolysStyles[properties._symbol]["rgb"];
-                        var outlineColor = MapUnitPolysStyles[properties._symbol]["fill-outline-color"];
 
                         return ({
                             weight: 1,
                             fillColor: rgb,
-                            color: outlineColor,
+                            color: '#6E6E6E',
                             fillOpacity: .5,
                             fill: true
                         });
