@@ -17,17 +17,11 @@ body {
   background-color: #e6e3d9;
 }
 
-[data-mapunit] {
-  border-style: solid;
-  border-width: 2px;
-  text-align: center;
-}
-
 .mapInfoBox {
   background-color: #fff;
   border: 2px solid rgba(0,0,0,0.2);
   background-clip: padding-box;
   padding: 6px 10px 6px 6px;
   border-radius: 5px;
-  max-width: 150px;
+  width: 150px;
 }

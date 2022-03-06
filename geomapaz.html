@@ -304,7 +304,7 @@
             return this._div;
         };
 
-        // Update html function for Mups info box
+        // Update html function for map info box
         info.update = function (update) {
             $('.mapInfoBox').removeClass("invisible");
             this._div.innerHTML = (update ? `<div>${update}</div>` : '');
@@ -312,7 +312,7 @@
 
         info.addTo(map);
 
-        // Update MUPs info box on mouseover
+        // Update map info box on MUPS mouseover
         mups.on('mouseover', function (e) {
 
             var symbol = e.sourceTarget.properties._symbol;
