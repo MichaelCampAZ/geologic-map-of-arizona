@@ -274,30 +274,36 @@
             mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
 
             // Contacts and Faults
-            var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsFaultsLines/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
+            var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsAndFaultsGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
                 attribution: 'cf',
                 vectorTileLayerStyles: {
-                    "ContactsFaults": function (properties, zoom, geometryDimension) {
-                        var cf_symbol = properties._symbol;
+                    "ContactsAndFaults": function (properties, zoom, geometryDimension) {
+                        var symbol = properties._symbol;
 
-                        switch (cf_symbol) {
+                        switch (symbol) {
                             case 0:
-                                // 1.1.1
-                                return ({ weight: 1, color: "#001C48", });
+                                // detachment fault
+                                return ({ weight: 1, color: "#000", dashArray: "4" });
                             case 1:
-                                // 2.1.1
-                                return ({ weight: 1, color: "#1E5288", });
+                                // detachment fault, inferred
+                                return ({ weight: 1, color: "#000", dashArray: "4" });
                             case 2:
-                                // 2.10.1
+                                // fault
                                 return ({ weight: 1, color: "#8B0015", });
                             case 3:
-                                // 2.10.33
+                                // fault, high-angle
                                 return ({ weight: 1, color: "#378DBD", });
                             case 4:
-                                // 2.8.1
+                                // fault, quaternary
+                                return ({ weight: 1, color: "#EF4056", });
+                            case 5:
+                                // low angle normal fault
+                                return ({ weight: 1, color: "#EF4056", });
+                            case 6:
+                                // thrust fault
                                 return ({ weight: 1, color: "#EF4056", });
                             default:
-                                console.log("Missing Symbol: " + cf_symbol);
+                                console.log("Missing Symbol: " + symbol);
                                 return ({ weight: 1, color: "#000", });
                         }
 
