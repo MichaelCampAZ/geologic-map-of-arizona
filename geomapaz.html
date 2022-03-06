@@ -208,7 +208,7 @@
 
         var MapUnitPolysStyles = {};
 
-        $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/resources/styles/root.json?f=pjson", function success(data) {
+        $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolysGeoMapAz/VectorTileServer/resources/styles/root.json?f=pjson", function success(data) {
 
             $.each(data.layers, function (key, val) {
 
@@ -236,11 +236,13 @@
 
             });
 
+            console.log(MapUnitPolysStyles);
+
             // Map Unit Poly vectorGrid layer
-            var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolys_VectorTileFeature/VectorTileServer/tile/{z}/{y}/{x}.pbf", {
-                attribution: '<a href="https://www.azgs.arizona.edu/">Arizona Geological Survey</a>',
+            var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolysGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
+                attribution: '<a href="https://www.azgs.arizona.edu/">AZGS</a>',
                 vectorTileLayerStyles: {
-                    "Map Unit Polys": function (properties, zoom, geometryDimension) {
+                    "MapUnitPolys": function (properties, zoom, geometryDimension) {
 
                         var rgb = MapUnitPolysStyles[properties._symbol]["rgb"];
                         var outlineColor = MapUnitPolysStyles[properties._symbol]["fill-outline-color"];
