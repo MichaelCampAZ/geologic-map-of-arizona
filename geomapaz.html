@@ -294,27 +294,26 @@
             $('#Modal').modal('show');
         });
 
-        // MUPs info box
+        // Map info box
         var info = L.control();
 
         // Setup html and update function for the info box
         info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'mupInfo invisible');
+            this._div = L.DomUtil.create('div', 'mapInfoBox invisible');
             this.update();
             return this._div;
         };
 
         // Update html function for Mups info box
-        info.update = function (props) {
-            // this._div.innerHTML = (props ? `<div>${props}</div>` : '');
-            this._div.innerHTML = `<div>${props}</div>`;
+        info.update = function (update) {
+            $('.mapInfoBox').removeClass("invisible");
+            this._div.innerHTML = (update ? `<div>${update}</div>` : '');
         };
 
         info.addTo(map);
 
         // Update MUPs info box on mouseover
         mups.on('mouseover', function (e) {
-            $('.mupInfo').removeClass("invisible")
 
             var symbol = e.sourceTarget.properties._symbol;
 
@@ -323,8 +322,8 @@
             info.update(MapUnit.fullname);
         });
 
-        // Hide the MUPs info box on mouse out of the mup layer
-        mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
+        // Hide the map info box on mouse out of the map
+        map.on('mouseout', function () { $('.mapInfoBox').addClass("invisible") });
 
         // Contacts and Faults
         var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsAndFaultsGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
@@ -365,10 +364,10 @@
             interactive: true
         }).addTo(map);;
 
-        var tooltip = new L.tooltip();
-
         cf.on('mouseover', function (e) {
+
             var symbol = e.sourceTarget.properties._symbol;
+
             var popupContent;
 
             switch (symbol) {
@@ -395,9 +394,7 @@
                     break;
             }
 
-            tooltip.setLatLng(e.latlng);
-            tooltip.setContent(popupContent);
-            map.openTooltip(tooltip);
+            info.update(popupContent);
         });
 
         layerControl.addOverlay(cf, "Faults");
