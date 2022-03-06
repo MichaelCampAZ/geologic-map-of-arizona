@@ -303,6 +303,49 @@
             interactive: true
         }).addTo(map);;
 
+        var popup = new L.Popup();
+
+        cf.on('mouseover', function (e) {
+            var symbol = e.sourceTarget.properties._symbol;
+            var popupContent;
+
+            switch (symbol) {
+                case 0:
+                    popupContent = 'detachment fault'
+                    break;
+                case 1:
+                    popupContent = 'detachment fault, inferred'
+                    break;
+                case 2:
+                    popupContent = 'fault'
+                    break;
+                case 3:
+                    popupContent = 'fault, high-angle'
+                    break;
+                case 4:
+                    popupContent = 'fault, quaternary'
+                    break;
+                case 5:
+                    popupContent = 'low angle normal fault'
+                    break;
+                case 6:
+                    popupContent = 'thrust fault'
+                    break;
+                default:
+                    popupContent = "Missing Symbol: " + symbol;
+                    break;
+            }
+
+            popup.setLatLng(e.latlng);
+            popup.setContent(popupContent);
+            map.openPopup(popup);
+        });
+
+        cf.on('mouseover', function (e) {
+            popup.closePopup();
+        });
+
+
         layerControl.addOverlay(cf, "Faults");
 
         // AZGS Datasets
