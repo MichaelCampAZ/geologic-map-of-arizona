@@ -336,28 +336,28 @@
                     switch (symbol) {
                         case 0:
                             // detachment fault
-                            return ({ weight: 1, color: "#000", dashArray: "4" });
+                            return ({ weight: 2, color: "#000", dashArray: "4" });
                         case 1:
                             // detachment fault, inferred
-                            return ({ weight: 1, color: "#000", dashArray: "4" });
+                            return ({ weight: 2, color: "#000", dashArray: "4" });
                         case 2:
                             // fault
-                            return ({ weight: 1, color: "#8B0015", });
+                            return ({ weight: 2, color: "#8B0015", });
                         case 3:
                             // fault, high-angle
-                            return ({ weight: 1, color: "#378DBD", });
+                            return ({ weight: 2, color: "#378DBD", });
                         case 4:
                             // fault, quaternary
-                            return ({ weight: 1, color: "#EF4056", });
+                            return ({ weight: 2, color: "#EF4056", });
                         case 5:
                             // low angle normal fault
-                            return ({ weight: 1, color: "#EF4056", });
+                            return ({ weight: 2, color: "#EF4056", });
                         case 6:
                             // thrust fault
-                            return ({ weight: 1, color: "#EF4056", });
+                            return ({ weight: 2, color: "#EF4056", });
                         default:
                             console.log("Missing Symbol: " + symbol);
-                            return ({ weight: 1, color: "#000", });
+                            return ({ weight: 2, color: "#000", });
                     }
 
                 }
@@ -372,26 +372,23 @@
             var popupContent;
 
             switch (symbol) {
-                case 0:
-                    popupContent = 'detachment fault'
-                    break;
-                case 1:
-                    popupContent = 'detachment fault, inferred'
+                case 0:case 1:
+                    popupContent = 'Detachment fault'
                     break;
                 case 2:
-                    popupContent = 'fault'
+                    popupContent = 'Fault'
                     break;
                 case 3:
-                    popupContent = 'fault, high-angle'
+                    popupContent = 'High-angle fault'
                     break;
                 case 4:
-                    popupContent = 'fault, quaternary'
+                    popupContent = 'Quaternary fault'
                     break;
                 case 5:
-                    popupContent = 'low angle normal fault'
+                    popupContent = 'Low-angle normal fault'
                     break;
                 case 6:
-                    popupContent = 'thrust fault'
+                    popupContent = 'Thrust fault'
                     break;
                 default:
                     popupContent = "Missing Symbol: " + symbol;
