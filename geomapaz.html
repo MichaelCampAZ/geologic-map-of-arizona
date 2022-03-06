@@ -81,9 +81,9 @@
             </a>
         </div>
 
-        <div id='map'></div>
+        <div id='map' class="mb-3"></div>
 
-        <div id="mupModal" class="modal" tabindex="-1" role="dialog">
+        <div id="Modal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -98,265 +98,274 @@
             </div>
         </div>
 
-        <div id='legend'>
-            <!-- <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-img-top" data-mapunit=""></h3>
-                            <h5 class="card-title"></h5>
-                            <p class="card-text"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-img-top" data-mapunit=""></h3>
-                            <h5 class="card-title"></h5>
-                            <p class="card-text"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-img-top" data-mapunit=""></h3>
-                            <h5 class="card-title"></h5>
-                            <p class="card-text"></p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+        <div id='MupLegend'>
+            <h3 class="text-center">Geologic Units</h3>
+            <div id="MupLegendRow0" class="row"></div>
+            <div id="MupLegendRow1" class="row"></div>
+            <div id="MupLegendRow2" class="row"></div>
+            <div id="MupLegendRow3" class="row"></div>
+            <div id="MupLegendRow4" class="row"></div>
+            <div id="MupLegendRow5" class="row"></div>
+            <div id="MupLegendRow6" class="row"></div>
+            <div id="MupLegendRow7" class="row"></div>
+            <div id="MupLegendRow8" class="row"></div>
+            <div id="MupLegendRow9" class="row"></div>
+            <div id="MupLegendRow10" class="row"></div>
+            <div id="MupLegendRow11" class="row"></div>
+            <div id="MupLegendRow12" class="row"></div>
+            <div id="MupLegendRow13" class="row"></div>
+            <div id="MupLegendRow14" class="row"></div>
+            <div id="MupLegendRow15" class="row"></div>
+            <div id="MupLegendRow16" class="row"></div>
+            <div id="MupLegendRow17" class="row"></div>
         </div>
+    </div>
 
-        <div class="footer mt-5">
-            <div class="container">
-                <div class="text-center text-muted p-3">
-                    <div class="p-2">520.621.2352 | 1955 East 6th Street, P.O. Box 210184, Tucson, AZ 85721</div>
-                    <div class="p-2">The maps, reports, and other information and content on this website are provided
-                        as
-                        a
-                        public service for informational purposes only. Accuracy is not guaranteed, and the information
-                        contained or linked on this website should not be relied on except as general information. The
-                        University makes no
-                        warranties or representations of any kind, and specifically disclaims all warranties including
-                        the
-                        warranty of merchantability and fitness for a particular purpose. Users are responsible for
-                        verification
-                        of all
-                        facts and information to their own satisfaction.</div>
-                    <div class="p-2">© 2022 The Arizona Board of Regents on behalf of <a href="http://www.arizona.edu"
-                            style="color: #333; font-weight: 700; text-decoration: underline;" target="_blank">The
-                            University of Arizona</a>.</div>
-                </div>
+    <div class="footer mt-5">
+        <div class="container">
+            <div class="text-center text-muted p-3">
+                <div class="p-2">520.621.2352 | 1955 East 6th Street, P.O. Box 210184, Tucson, AZ 85721</div>
+                <div class="p-2">The maps, reports, and other information and content on this website are provided
+                    as
+                    a
+                    public service for informational purposes only. Accuracy is not guaranteed, and the information
+                    contained or linked on this website should not be relied on except as general information. The
+                    University makes no
+                    warranties or representations of any kind, and specifically disclaims all warranties including
+                    the
+                    warranty of merchantability and fitness for a particular purpose. Users are responsible for
+                    verification
+                    of all
+                    facts and information to their own satisfaction.</div>
+                <div class="p-2">© 2022 The Arizona Board of Regents on behalf of <a href="http://www.arizona.edu"
+                        style="color: #333; font-weight: 700; text-decoration: underline;" target="_blank">The
+                        University of Arizona</a>.</div>
             </div>
         </div>
+    </div>
 
-        <script src="./js/MupJson.js"></script>
-        <script>
+    <script src="./js/MupJson.js"></script>
+    <script>
 
-            // Set zoom level at 6 for mobile screens
-            var zoomLevel = L.Browser.mobile ? 6 : 7;
+        // Set zoom level at 6 for mobile screens
+        var zoomLevel = L.Browser.mobile ? 6 : 7;
 
-            // Map init
-            var map = L.map('map', {
-                center: [34.16, -111.62],
-                maxBounds: L.latLngBounds([[29.96818929679422, -126.13671875], [38.34395908944491, -97.226318359375]]),
-                maxZoom: 13,
-                minZoom: 6,
-                zoom: zoomLevel,
-            });
+        // Map init
+        var map = L.map('map', {
+            center: [34.16, -111.62],
+            maxBounds: L.latLngBounds([[29.96818929679422, -126.13671875], [38.34395908944491, -97.226318359375]]),
+            maxZoom: 13,
+            minZoom: 6,
+            zoom: zoomLevel,
+        });
 
-            // USGS_USTopo Basemap
-            var USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
-                attribution: '<a href="https://usgs.gov/">U.S. Geological Survey</a>'
-            }).addTo(map);
+        // USGS_USTopo Basemap
+        var USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '<a href="https://usgs.gov/">U.S. Geological Survey</a>'
+        }).addTo(map);
 
-            // USGS_USImageryTopo Basemap
-            var USGS_USImageryTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
-                attribution: '<a href="https://usgs.gov/">U.S. Geological Survey</a>'
-            });
+        // USGS_USImageryTopo Basemap
+        var USGS_USImageryTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '<a href="https://usgs.gov/">U.S. Geological Survey</a>'
+        });
 
-            // OpenStreetMap Basemap
-            var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            });
+        // OpenStreetMap Basemap
+        var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
 
-            // Basemap layer group
-            var basemaps = {
-                "USGS Topo": USGS_USTopo,
-                "USGS Imagery Topo": USGS_USImageryTopo,
-                "Open Street Map": OpenStreetMap
-            }
+        // Basemap layer group
+        var basemaps = {
+            "USGS Topo": USGS_USTopo,
+            "USGS Imagery Topo": USGS_USImageryTopo,
+            "Open Street Map": OpenStreetMap
+        }
 
-            // Add uncollapsed layer controller to the map.
-            var layerControl = L.control.layers(basemaps, {}, { collapsed: false }).addTo(map);
+        // Add uncollapsed layer controller to the map.
+        var layerControl = L.control.layers(basemaps, {}, { collapsed: false }).addTo(map);
 
-            // Add scale bar
-            L.control.scale().addTo(map);
+        // Add scale bar
+        L.control.scale().addTo(map);
 
-            // Map Unit Poly vectorGrid layer
-            var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolysGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
-                attribution: '<a href="https://www.azgs.arizona.edu/">AZGS</a>',
-                vectorTileLayerStyles: {
-                    "MapUnitPolys": function (properties, zoom, geometryDimension) {
+        // Map Unit Poly vectorGrid layer
+        var mups = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolysGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
+            attribution: '<a href="https://www.azgs.arizona.edu/">AZGS</a>',
+            vectorTileLayerStyles: {
+                "MapUnitPolys": function (properties, zoom, geometryDimension) {
 
-                        // Get the symbol value of the feature
-                        var symbol = properties._symbol;
+                    // Get the symbol value of the feature
+                    var symbol = properties._symbol;
 
-                        // Get the map unit with that symbol
-                        var MapUnit = MupsJson[symbol];
+                    // Get the map unit with that symbol
+                    var MapUnit = MupsJson[symbol];
 
-                        return ({
-                            weight: 1,
-                            fillColor: MapUnit.rgb,
-                            color: '#6E6E6E',
-                            fillOpacity: .5,
-                            fill: true
-                        });
-                    }
-                },
-                interactive: true
-            }).addTo(map);;
-
-            layerControl.addOverlay(mups, "Geologic Units");
-
-            mups.on('click', function (e) {
-                // Get the symbol from the event
-                var symbol = e.sourceTarget.properties._symbol;
-
-                // Get the map unit from the symbol
-                var MapUnit = MupsJson[symbol]
-
-                var rgb = MapUnit.rgb;
-                var fullname = MapUnit.fullname;
-                var description = MapUnit.description;
-
-                // BOOTSTRAP MODAL 
-                var body = `<p>${description}</p>`
-                $("#mupModal .modal-title").text(fullname);
-                $("#mupModal .modal-body").html(body);
-                $("#mupModal .modal-header").css("background-color", rgb);
-                $('#mupModal').modal('show');
-            });
-
-            // MUPs info box
-            var info = L.control();
-
-            // Setup html and update function for the info box
-            info.onAdd = function (map) {
-                this._div = L.DomUtil.create('div', 'mupInfo invisible');
-                this.update();
-                return this._div;
-            };
-
-            // Update html function for Mups info box
-            info.update = function (props) {
-                // this._div.innerHTML = (props ? `<div>${props}</div>` : '');
-                this._div.innerHTML = `<div>${props}</div>`;
-            };
-
-            info.addTo(map);
-
-            // Update MUPs info box on mouseover
-            mups.on('mouseover', function (e) {
-                $('.mupInfo').removeClass("invisible")
-
-                var symbol = e.sourceTarget.properties._symbol;
-
-                var MapUnit = MupsJson[symbol]
-
-                info.update(MapUnit.fullname);
-            });
-
-            // Hide the MUPs info box on mouse out of the mup layer
-            mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
-
-            // Contacts and Faults
-            var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsAndFaultsGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
-                attribution: 'cf',
-                vectorTileLayerStyles: {
-                    "ContactsAndFaults": function (properties, zoom, geometryDimension) {
-                        var symbol = properties._symbol;
-
-                        switch (symbol) {
-                            case 0:
-                                // detachment fault
-                                return ({ weight: 1, color: "#000", dashArray: "4" });
-                            case 1:
-                                // detachment fault, inferred
-                                return ({ weight: 1, color: "#000", dashArray: "4" });
-                            case 2:
-                                // fault
-                                return ({ weight: 1, color: "#8B0015", });
-                            case 3:
-                                // fault, high-angle
-                                return ({ weight: 1, color: "#378DBD", });
-                            case 4:
-                                // fault, quaternary
-                                return ({ weight: 1, color: "#EF4056", });
-                            case 5:
-                                // low angle normal fault
-                                return ({ weight: 1, color: "#EF4056", });
-                            case 6:
-                                // thrust fault
-                                return ({ weight: 1, color: "#EF4056", });
-                            default:
-                                console.log("Missing Symbol: " + symbol);
-                                return ({ weight: 1, color: "#000", });
-                        }
-
-                    }
-                },
-                interactive: true
-            }).addTo(map);;
-
-            layerControl.addOverlay(cf, "Faults");
-
-            // AZGS Datasets
-            $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=500", function success(data) {
-
-                function onAzgsClick(e) {
-                    var features = leafletPip.pointInLayer(e.latlng, azgsMaps);
-                    var bodyHtml = "<div>";
-
-                    features.forEach((polygon) => {
-                        // console.log(polygon.feature.properties);
-                        bodyHtml += `<b>${polygon.feature.properties.title} (${polygon.feature.properties.year})</b><br/>`;
-                        bodyHtml += '</p >';
+                    return ({
+                        weight: 1,
+                        fillColor: MapUnit.rgb,
+                        color: '#6E6E6E',
+                        fillOpacity: .5,
+                        fill: true
                     });
+                }
+            },
+            interactive: true
+        }).addTo(map);;
 
-                    bodyHtml += "TODO: format & links</div>";
+        layerControl.addOverlay(mups, "Geologic Units");
 
-                    $("#mupModal .modal-title").text(`${features.length} AZGS Datasets`);
-                    $("#mupModal .modal-body").html(bodyHtml);
-                    $("#mupModal .modal-header").css("background-color", "#D3D3D3");
-                    $('#mupModal').modal('show');
+        mups.on('click', function (e) {
+            // Get the symbol from the event
+            var symbol = e.sourceTarget.properties._symbol;
+
+            // Get the map unit from the symbol
+            var MapUnit = MupsJson[symbol]
+
+            var rgb = MapUnit.rgb;
+            var fullname = MapUnit.fullname;
+            var description = MapUnit.description;
+
+            // BOOTSTRAP MODAL 
+            var body = `<p>${description}</p>`
+            $("#Modal .modal-title").text(fullname);
+            $("#Modal .modal-body").html(body);
+            $("#Modal .modal-header").css("background-color", rgb);
+            $('#Modal').modal('show');
+        });
+
+        // MUPs info box
+        var info = L.control();
+
+        // Setup html and update function for the info box
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'mupInfo invisible');
+            this.update();
+            return this._div;
+        };
+
+        // Update html function for Mups info box
+        info.update = function (props) {
+            // this._div.innerHTML = (props ? `<div>${props}</div>` : '');
+            this._div.innerHTML = `<div>${props}</div>`;
+        };
+
+        info.addTo(map);
+
+        // Update MUPs info box on mouseover
+        mups.on('mouseover', function (e) {
+            $('.mupInfo').removeClass("invisible")
+
+            var symbol = e.sourceTarget.properties._symbol;
+
+            var MapUnit = MupsJson[symbol]
+
+            info.update(MapUnit.fullname);
+        });
+
+        // Hide the MUPs info box on mouse out of the mup layer
+        mups.on('mouseout', function () { $('.mupInfo').addClass("invisible") });
+
+        // Contacts and Faults
+        var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsAndFaultsGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
+            attribution: 'cf',
+            vectorTileLayerStyles: {
+                "ContactsAndFaults": function (properties, zoom, geometryDimension) {
+                    var symbol = properties._symbol;
+
+                    switch (symbol) {
+                        case 0:
+                            // detachment fault
+                            return ({ weight: 1, color: "#000", dashArray: "4" });
+                        case 1:
+                            // detachment fault, inferred
+                            return ({ weight: 1, color: "#000", dashArray: "4" });
+                        case 2:
+                            // fault
+                            return ({ weight: 1, color: "#8B0015", });
+                        case 3:
+                            // fault, high-angle
+                            return ({ weight: 1, color: "#378DBD", });
+                        case 4:
+                            // fault, quaternary
+                            return ({ weight: 1, color: "#EF4056", });
+                        case 5:
+                            // low angle normal fault
+                            return ({ weight: 1, color: "#EF4056", });
+                        case 6:
+                            // thrust fault
+                            return ({ weight: 1, color: "#EF4056", });
+                        default:
+                            console.log("Missing Symbol: " + symbol);
+                            return ({ weight: 1, color: "#000", });
+                    }
 
                 }
+            },
+            interactive: true
+        }).addTo(map);;
 
-                var azgsMaps = L.geoJSON(data, {
-                    filter: function (feature) {
-                        // Remove the big datasets
-                        if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
-                            return false;
-                        }
+        layerControl.addOverlay(cf, "Faults");
 
-                        return true;
-                    },
-                    style: function (feature) {
-                        return { color: "#1E5288", fillColor: "#" + ((1 << 24) * Math.random() | 0).toString(16) };
-                    }
+        // AZGS Datasets
+        $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=500", function success(data) {
+
+            function onAzgsClick(e) {
+                var features = leafletPip.pointInLayer(e.latlng, azgsMaps);
+                var bodyHtml = "<div>";
+
+                features.forEach((polygon) => {
+                    // console.log(polygon.feature.properties);
+                    bodyHtml += `<b>${polygon.feature.properties.title} (${polygon.feature.properties.year})</b><br/>`;
+                    bodyHtml += '</p >';
                 });
 
-                azgsMaps.on('click', onAzgsClick);
+                bodyHtml += "TODO: format & links</div>";
 
-                layerControl.addOverlay(azgsMaps, "AZGS Datasets");
+                $("#Modal .modal-title").text(`${features.length} AZGS Datasets`);
+                $("#Modal .modal-body").html(bodyHtml);
+                $("#Modal .modal-header").css("background-color", "#D3D3D3");
+                $('#Modal').modal('show');
 
+            }
+
+            var azgsMaps = L.geoJSON(data, {
+                filter: function (feature) {
+                    // Remove the big datasets
+                    if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
+                        return false;
+                    }
+
+                    return true;
+                },
+                style: function (feature) {
+                    return { color: "#1E5288", fillColor: "#" + ((1 << 24) * Math.random() | 0).toString(16) };
+                }
             });
 
-        </script>
+            azgsMaps.on('click', onAzgsClick);
+
+            layerControl.addOverlay(azgsMaps, "AZGS Datasets");
+
+        });
+
+        // Build the MUP legend
+        $.each(MupsJson, function (index, value) {
+
+            var rowNumber = Math.floor(index / 3);
+
+            $(`#MupLegendRow${rowNumber}`).append(`<div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-img-top p-3" style="background-color:${value.rgb};></h5>
+                        <span class="card-title">${value.fullname}</span>
+                        <h6 class="card-subtitle mb-2 text-muted">${value.age}</h6>
+                        <p class="card-text">${value.description}</p>
+                    </div>
+                </div>
+            </div>`)
+
+        });
+
+    </script>
 </body>
 
 </html>
