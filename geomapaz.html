@@ -303,7 +303,7 @@
             interactive: true
         }).addTo(map);;
 
-        var popup = new L.Popup();
+        var tooltip = new L.tooltip();
 
         cf.on('mouseover', function (e) {
             var symbol = e.sourceTarget.properties._symbol;
@@ -336,15 +336,10 @@
                     break;
             }
 
-            popup.setLatLng(e.latlng);
-            popup.setContent(popupContent);
-            map.openPopup(popup);
+            tooltip.setLatLng(e.latlng);
+            tooltip.setContent(popupContent);
+            map.openTooltip(tooltip);
         });
-
-        cf.on('mouseover', function (e) {
-            popup.closePopup();
-        });
-
 
         layerControl.addOverlay(cf, "Faults");
 
