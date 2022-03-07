@@ -338,28 +338,28 @@
                     switch (symbol) {
                         case 0:
                             // detachment fault
-                            return ({ weight: 2, color: "#000", dashArray: "4" });
+                            return ({ weight: 1.5, color: "#000", dashArray: "1, 7" });
                         case 1:
                             // detachment fault, inferred
-                            return ({ weight: 2, color: "#000", dashArray: "4" });
+                            return ({ weight: 1.5, color: "#000", dashArray: "1, 7" });
                         case 2:
                             // fault
-                            return ({ weight: 2, color: "#8B0015", });
+                            return ({ weight: 1.5, color: "#000", });
                         case 3:
                             // fault, high-angle
-                            return ({ weight: 2, color: "#378DBD", });
+                            return ({ weight: 1.5, color: "#000", });
                         case 4:
                             // fault, quaternary
-                            return ({ weight: 2, color: "#EF4056", });
+                            return ({ weight: 1.5, color: "red", });
                         case 5:
                             // low angle normal fault
-                            return ({ weight: 2, color: "#EF4056", });
+                            return ({ weight: 1.5, color: "#000", });
                         case 6:
                             // thrust fault
-                            return ({ weight: 2, color: "#EF4056", });
+                            return ({ weight: 1.5, color: "#000", });
                         default:
                             console.log("Missing Symbol: " + symbol);
-                            return ({ weight: 2, color: "#000", });
+                            return ({ weight: 1.5, color: "#000", });
                     }
 
                 }
