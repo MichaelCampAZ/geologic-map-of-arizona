@@ -16,8 +16,12 @@ body {
   background-color: #0c234b;
 }
 
-.btn-azblue:hover, .btn-azblue:active {
+.btn-azblue:hover {
   background-color: #133877;
+}
+
+.card-legend {
+  background-color: #f3f6f4;
 }
 
 .footer {
