@@ -7,8 +7,17 @@ body {
   min-height: 75vh;
 }
 
-.bg-red {
+.bg-azred {
   background-color: #ab0520;
+}
+
+.btn-azblue {
+  color: #fff;
+  background-color: #0c234b;
+}
+
+.btn-azblue:hover, .btn-azblue:active {
+  background-color: #133877;
 }
 
 .footer {

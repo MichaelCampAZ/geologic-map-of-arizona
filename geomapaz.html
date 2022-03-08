@@ -45,7 +45,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-red">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-azred">
 
         <a class="navbar-brand" href="http://www.arizona.edu" title="The University of Arizona">
             <img alt="The University of Arizona" height="16" src="./img/ua.svg" />
@@ -103,71 +103,61 @@
             <div class="card">
                 <div class="card-header" id="faultsLegend">
                     <h5 class="mb-0">
-                        <button class="btn btn-secondary btn-lg btn-block collapsed" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                            Faults
+                        <button class="btn btn-azblue btn-lg btn-block collapsed" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            FAULTS
                         </button>
                     </h5>
                 </div>
 
                 <div id="collapseOne" class="collapse" aria-labelledby="faultsLegend" data-parent="#accordion">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4 p-1">
+                        <div class="row text-center">
+                            <div class="col-md-3 p-1">
                                 <div class="card">
                                     <div class="card-body">
                                         <img src="./img/azgs100.png">
-                                        <h5 class="card-title">1.1.1</h5>
-                                        <!-- <p class="card-text"></p> -->
+                                        <h5 class="card-title" data-key="2.1.1">Fault</h5>
+                                        <p class="card-text">Fault (generic; vertical, subvertical, or high-angle; or
+                                            unknown or unspecified orientation or sense of slip) —Identity and existence
+                                            certain, location accurate</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 p-1">
+                            <div class="col-md-3 p-1">
                                 <div class="card">
                                     <div class="card-body">
                                         <img src="./img/azgs100.png">
-                                        <h5 class="card-title">2.1.1</h5>
-                                        <!-- <p class="card-text"></p> -->
+                                        <h5 class="card-title" data-key="2.10.1">Detachment fault</h5>
+                                        <p class="card-text">Detachment fault (sense of slip unspecified) (1st
+                                            option)—Identity and existence certain, location accurate. Hachures on upper
+                                            plate Detachment fault (sense of slip unspecified)</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 p-1">
+                            <div class="col-md-3 p-1">
                                 <div class="card">
                                     <div class="card-body">
                                         <img src="./img/azgs100.png">
-                                        <h5 class="card-title">2.10.1</h5>
-                                        <!-- <p class="card-text"></p> -->
+                                        <h5 class="card-title" data-key="2.8.1">Thrust fault</h5>
+                                        <p class="card-text">Thrust fault (1st option)—Identity and existence certain,
+                                            location accurate. Sawteeth on upper (tectonically higher) plate</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 p-1">
+                            <div class="col-md-3 p-1">
                                 <div class="card">
                                     <div class="card-body">
                                         <img src="./img/azgs100.png">
-                                        <h5 class="card-title">2.8.1</h5>
-                                        <!-- <p class="card-text"></p> -->
+                                        <h5 class="card-title" data-key="2.10.33">Listric fault</h5>
+                                        <p class="card-text">Listric fault at head of detachment fault (sense of slip
+                                            unspecified)—Identity and existence certain, location accurate. Ticks on
+                                            upper plate
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 p-1">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <img src="./img/azgs100.png">
-                                        <h5 class="card-title">2.10.33</h5>
-                                        <!-- <p class="card-text"></p> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="col-md-4 p-1">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="./img/azgs100.png">
-                                    <h5 class="card-title"></h5>
-                                </div>
-                            </div>
-                        </div> -->
+
                         </div>
                     </div>
                 </div>
@@ -176,9 +166,9 @@
             <div class="card">
                 <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
-                        <button class="btn btn-secondary btn-lg btn-block collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="false" aria-controls="collapseTwo">
-                            Geologic Units
+                        <button class="btn btn-azblue btn-lg btn-block collapsed" data-toggle="collapse"
+                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            GEOLOGIC UNITS
                         </button>
                     </h5>
                 </div>
@@ -210,9 +200,9 @@
             <div class="card">
                 <div class="card-header" id="headingThree">
                     <h5 class="mb-0">
-                        <button class="btn btn-secondary btn-lg btn-block collapsed" data-toggle="collapse" data-target="#collapseThree"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            AZGS Datasets
+                        <button class="btn btn-azblue btn-lg btn-block collapsed" data-toggle="collapse"
+                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            AZGS MAPS
                         </button>
                     </h5>
                 </div>
@@ -388,7 +378,9 @@
 
                 bodyHtml += '</div>';
 
-                $("#Modal .modal-title").text(`${features.length} AZGS Datasets`);
+                var mapPlural = features.length === 1 ? "Map" : "Maps";
+
+                $("#Modal .modal-title").text(`AZGS ${mapPlural}`);
                 $("#Modal .modal-age").text("");
                 $("#Modal .modal-body").html(bodyHtml);
                 $("#Modal .modal-header").css("background-color", "#D3D3D3");
@@ -413,7 +405,7 @@
 
             azgsMaps.on('click', onAzgsClick);
 
-            layerControl.addOverlay(azgsMaps, "AZGS Datasets");
+            layerControl.addOverlay(azgsMaps, "AZGS Maps");
 
         });
 
