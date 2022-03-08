@@ -17,6 +17,10 @@ body {
   background-color: #e6e3d9;
 }
 
+.link-nodecoration {
+  text-decoration: none;
+}
+
 .mapInfoBox {
   background-color: #fff;
   border: 2px solid rgba(0,0,0,0.2);

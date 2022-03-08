@@ -341,12 +341,11 @@
                 var bodyHtml = "<div>";
 
                 features.forEach((polygon) => {
-                    // console.log(polygon.feature.properties);
-                    bodyHtml += `<b>${polygon.feature.properties.title} (${polygon.feature.properties.year})</b><br/>`;
-                    bodyHtml += '</p >';
+                    console.log(polygon.feature.properties);
+                    bodyHtml += `<p><a class="link-nodecoration" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></p>`;
                 });
 
-                bodyHtml += "TODO: format & links</div>";
+                bodyHtml += '</div>';
 
                 $("#Modal .modal-title").text(`${features.length} AZGS Datasets`);
                 $("#Modal .modal-age").text("");
