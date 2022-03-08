@@ -4,7 +4,8 @@ body {
 }
 
 #map {
-  min-height: 75vh;
+  height: 75vh;
+  width: 100%;
 }
 
 .bg-azred {
