@@ -106,16 +106,7 @@
                     <div class="card">
                         <div class="card-body">
                             <img src="./img/azgs100.png">
-                            <h5 class="card-title">Detachment Fault</h5>
-                            <!-- <p class="card-text">Detachment Fault</p> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 p-1">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="./img/azgs100.png">
-                            <h5 class="card-title">High-angle fault</h5>
+                            <h5 class="card-title">1.1.1</h5>
                             <!-- <p class="card-text"></p> -->
                         </div>
                     </div>
@@ -124,7 +115,16 @@
                     <div class="card">
                         <div class="card-body">
                             <img src="./img/azgs100.png">
-                            <h5 class="card-title">Low-angle normal fault</h5>
+                            <h5 class="card-title">2.1.1</h5>
+                            <!-- <p class="card-text"></p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="./img/azgs100.png">
+                            <h5 class="card-title">2.10.1</h5>
                             <!-- <p class="card-text"></p> -->
                         </div>
                     </div>
@@ -135,16 +135,7 @@
                     <div class="card">
                         <div class="card-body">
                             <img src="./img/azgs100.png">
-                            <h5 class="card-title">Fault</h5>
-                            <!-- <p class="card-text">Fault</p> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 p-1">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="./img/azgs100.png">
-                            <h5 class="card-title">Thrust fault</h5>
+                            <h5 class="card-title">2.8.1</h5>
                             <!-- <p class="card-text">Thrust fault</p> -->
                         </div>
                     </div>
@@ -153,11 +144,19 @@
                     <div class="card">
                         <div class="card-body">
                             <img src="./img/azgs100.png">
-                            <h5 class="card-title">Quaternary fault</h5>
-                            <!-- <p class="card-text">Quaternary fault</p> -->
+                            <h5 class="card-title">2.10.33</h5>
+                            <!-- <p class="card-text">Fault</p> -->
                         </div>
                     </div>
                 </div>
+                <!-- <div class="col-md-4 p-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="./img/azgs100.png">
+                            <h5 class="card-title"></h5>
+                        </div>
+                    </div>
+                </div> -->
             </div>
         </div>
 
@@ -272,7 +271,7 @@
                 }
             },
             interactive: true
-        }).addTo(map);;
+        }).addTo(map);
 
         layerControl.addOverlay(mups, "Geologic Units");
 
@@ -326,81 +325,13 @@
         });
 
         // Hide the map info box on mouse out of the map
-        map.on('mouseout', function () { $('.mapInfoBox').addClass("invisible") });
+        mups.on('mouseout', function () { $('.mapInfoBox').addClass("invisible") });
 
-        // Contacts and Faults
-        var cf = L.vectorGrid.protobuf("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/ContactsAndFaultsGeoMapAz/VectorTileServer/tile/{z}/{y}/{x}", {
+        var CFTile = L.tileLayer('https://tiles.arcgis.com/tiles/Ezk9fcjSUkeadg6u/arcgis/rest/services/FaultsGeoMapAz/MapServer/tile/{z}/{y}/{x}', {
             attribution: '<a href="https://www.azgs.arizona.edu/">AZGS</a>',
-            vectorTileLayerStyles: {
-                "ContactsAndFaults": function (properties, zoom, geometryDimension) {
-                    var symbol = properties._symbol;
+        }).addTo(map);
 
-                    switch (symbol) {
-                        case 0:
-                            // detachment fault
-                            return ({ weight: 1.5, color: "#000", dashArray: "1, 7" });
-                        case 1:
-                            // detachment fault, inferred
-                            return ({ weight: 1.5, color: "#000", dashArray: "1, 7" });
-                        case 2:
-                            // fault
-                            return ({ weight: 1.5, color: "#000", });
-                        case 3:
-                            // fault, high-angle
-                            return ({ weight: 1.5, color: "#000", });
-                        case 4:
-                            // fault, quaternary
-                            return ({ weight: 1.5, color: "red", });
-                        case 5:
-                            // low angle normal fault
-                            return ({ weight: 1.5, color: "#000", });
-                        case 6:
-                            // thrust fault
-                            return ({ weight: 1.5, color: "#000", });
-                        default:
-                            console.log("Missing Symbol: " + symbol);
-                            return ({ weight: 1.5, color: "#000", });
-                    }
-
-                }
-            },
-            interactive: true
-        }).addTo(map);;
-
-        cf.on('mouseover', function (e) {
-
-            var symbol = e.sourceTarget.properties._symbol;
-
-            var popupContent;
-
-            switch (symbol) {
-                case 0: case 1:
-                    popupContent = 'Detachment fault'
-                    break;
-                case 2:
-                    popupContent = 'Fault'
-                    break;
-                case 3:
-                    popupContent = 'High-angle fault'
-                    break;
-                case 4:
-                    popupContent = 'Quaternary fault'
-                    break;
-                case 5:
-                    popupContent = 'Low-angle normal fault'
-                    break;
-                case 6:
-                    popupContent = 'Thrust fault'
-                    break;
-                default:
-                    popupContent = "Missing Symbol: " + symbol;
-                    break;
-            }
-
-            info.update(popupContent);
-        });
-
-        layerControl.addOverlay(cf, "Faults");
+        layerControl.addOverlay(CFTile, "Faults");
 
         // AZGS Datasets
         $.getJSON("https://data.azgs.arizona.edu/api/v1/metadata?collection_group=ADGM&format=geojson&latest=true&limit=500", function success(data) {
