@@ -4,8 +4,7 @@ body {
 }
 
 #map {
-  height: 75vh;
-  width: 100%;
+  height: 80vh;
 }
 
 .bg-azred {
@@ -19,10 +18,6 @@ body {
 
 .btn-azblue:hover {
   background-color: #133877;
-}
-
-.card-legend {
-  background-color: #f3f6f4;
 }
 
 .footer {

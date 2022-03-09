@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="d-none d-sm-block p-2">
             <a href="http://www.azgs.arizona.edu">
@@ -81,7 +81,7 @@
             </a>
         </div>
 
-        <div id='map' class="mb-3"></div>
+        <div id='map'></div>
 
         <div id="Modal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -108,9 +108,9 @@
             </div>
 
             <div id="collapseOne" class="collapse" aria-labelledby="faultsLegend" data-parent="#accordion">
-                <div class="card-legend card-body">
+                <div class="card-body">
                     <div class="row text-center">
-                        <div class="col-md-3 p-1">
+                        <div class="col-lg-3 col-md-6 p-1">
                             <div class="card">
                                 <div class="card-body">
                                     <img src="./img/azgs100.png">
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 p-1">
+                        <div class="col-lg-3 col-md-6 p-1">
                             <div class="card">
                                 <div class="card-body">
                                     <img src="./img/azgs100.png">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 p-1">
+                        <div class="col-lg-3 col-md-6 p-1">
                             <div class="card">
                                 <div class="card-body">
                                     <img src="./img/azgs100.png">
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 p-1">
+                        <div class="col-lg-3 col-md-6 p-1">
                             <div class="card">
                                 <div class="card-body">
                                     <img src="./img/azgs100.png">
@@ -166,7 +166,7 @@
                 </button>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                <div class="card-legend card-body">
+                <div class="card-body">
                     <div id='MupLegend'>
                         <div id="MupLegendRow0" class="row"></div>
                         <div id="MupLegendRow1" class="row"></div>
@@ -191,7 +191,6 @@
             </div>
         </div>
 
-
         <div class="mt-1" id="headingThree">
             <button class="btn btn-azblue btn-lg btn-block collapsed" data-toggle="collapse"
                 data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -199,7 +198,7 @@
             </button>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-            <div class="card-legend card-body">
+            <div class="card-body">
                 TODO
             </div>
         </div>
@@ -402,9 +401,9 @@
         // Build the MUP legend
         $.each(MupsJson, function (index, value) {
 
-            var rowNumber = Math.floor(index / 3);
+            var rowNumber = Math.floor(index / 4);
 
-            $(`#MupLegendRow${rowNumber}`).append(`<div class="col-md-4 p-2">
+            $(`#MupLegendRow${rowNumber}`).append(`<div class="col-lg-3 col-md-6 p-2">
                 <div class="card">
                     <div class="card-body">
                         <div class="p-1" style="background-color:${value.rgb};">
