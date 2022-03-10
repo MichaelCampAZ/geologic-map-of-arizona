@@ -1,11 +1,19 @@
-body {
-  padding: 0;
-  margin: 0;
-}
+/* leaflet */
 
 #map {
   height: 80vh;
 }
+
+.mapInfoBox {
+  background-color: #fff;
+  border: 2px solid rgba(0,0,0,0.2);
+  background-clip: padding-box;
+  padding: 6px 10px 6px 6px;
+  border-radius: 5px;
+  width: 150px;
+}
+
+/* bootstrap */
 
 .container {
   max-width: 1600px;
@@ -24,6 +32,10 @@ body {
   background-color: #133877;
 }
 
+.modal-dialog {
+  max-width: 1200px;
+}
+
 .footer {
   font-size: .8rem;
   color: #333333;
@@ -32,13 +44,4 @@ body {
 
 .link-nodecoration {
   text-decoration: none;
-}
-
-.mapInfoBox {
-  background-color: #fff;
-  border: 2px solid rgba(0,0,0,0.2);
-  background-clip: padding-box;
-  padding: 6px 10px 6px 6px;
-  border-radius: 5px;
-  width: 150px;
 }
