@@ -7,6 +7,10 @@ body {
   height: 80vh;
 }
 
+.container {
+  max-width: 1600px;
+}
+
 .bg-azred {
   background-color: #ab0520;
 }
