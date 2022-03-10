@@ -217,6 +217,7 @@
                                 <tr>
                                     <th>Year</th>
                                     <th data-priority="1">Title</th>
+                                    <th>Abstract</th>
                                 </tr>
                             </thead>
                             <tbody id="azgsMapTableBody">
@@ -431,12 +432,13 @@
                         var abstract = value.properties.abstract;
                         var url = value.properties.links[0].url;
 
-                        $("#azgsMapTableBody").append(`<tr><td>${year}</td><td><a href="${url}" target="_blank">${title}</a></td></tr>`);
+                        $("#azgsMapTableBody").append(`<tr><td>${year}</td><td><a href="${url}" target="_blank">${title}</a></td><td>${abstract}</td></tr>`);
                     }
 
                 });
 
                 var azgsTable = $('#azgsMapTable').DataTable({
+                    autoWidth: false,
                     responsive: true,
                 });
 
