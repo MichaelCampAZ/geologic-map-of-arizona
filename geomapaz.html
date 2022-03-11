@@ -385,7 +385,7 @@
 
                     features.forEach((polygon) => {
                         console.log(polygon.feature.properties);
-                        bodyHtml += `<p><a class="link-nodecoration" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></p>`;
+                        bodyHtml += `<p><a class="text-decoration-none" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></p>`;
                     });
 
                     bodyHtml += '</div>';
@@ -468,7 +468,7 @@
                 var fullname = value.fullname;
                 var description = value.description;
 
-                $("#mupsTableBody").append(`<tr><td></td><td style="background-color:${rgb};" >${fullname}</td><td>${age}</td><td>${description}</td></tr>`);
+                $("#mupsTableBody").append(`<tr><td></td><td style="font-size:1.05rem;background-color:${rgb};" >${fullname}</td><td>${age}</td><td>${description}</td></tr>`);
 
             });
 
