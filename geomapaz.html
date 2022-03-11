@@ -381,6 +381,11 @@
 
                 function onAzgsClick(e) {
                     var features = leafletPip.pointInLayer(e.latlng, azgsMaps);
+
+                    if (features.length === 0 ){
+                        return;
+                    }
+
                     var bodyHtml = "<div>";
 
                     features.forEach((polygon) => {
