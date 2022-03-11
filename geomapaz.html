@@ -450,12 +450,12 @@
                     columnDefs: [
                         { orderable: false, targets: 0 }
                     ],
-                    order: [[1, 'asc']],
+                    order: [[1, 'desc']],
                     responsive: {
                         details: {
                             display: $.fn.dataTable.Responsive.display.modal({
                                 header: function (row) {
-                                    return 'Geologic Map';
+                                    return 'Arizona Geological Survey Digital Geologic Map';
                                 }
                             }),
                             renderer: $.fn.dataTable.Responsive.renderer.tableAll({
