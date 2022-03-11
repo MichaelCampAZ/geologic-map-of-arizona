@@ -109,87 +109,89 @@
 
         <div class="accordion mt-2 mb-1" id="legends">
             <div>
-                <div id="headingOne">
+                <div class="mb-2" id="headingOne">
                     <button class="btn btn-azblue text-white btn-lg btn-block collapsed" type="button"
                         data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                         aria-controls="collapseOne">
-                        FAULTS
+                        GEOLOGIC UNITS
                     </button>
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#legends">
                     <div>
-                        <div class="row text-center">
-                            <div class="col-lg-3 col-md-6 p-1">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <img src="./img/azgs100.png">
-                                        <h5 class="card-title" data-key="2.1.1">Fault</h5>
-                                        <p class="card-text">Fault (generic; vertical, subvertical, or high-angle; or
-                                            unknown or unspecified orientation or sense of slip) —Identity and existence
-                                            certain, location accurate</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 p-1">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <img src="./img/azgs100.png">
-                                        <h5 class="card-title" data-key="2.10.1">Detachment fault</h5>
-                                        <p class="card-text">Detachment fault (sense of slip unspecified) (1st
-                                            option)—Identity and existence certain, location accurate. Hachures on upper
-                                            plate Detachment fault (sense of slip unspecified)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 p-1">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <img src="./img/azgs100.png">
-                                        <h5 class="card-title" data-key="2.8.1">Thrust fault</h5>
-                                        <p class="card-text">Thrust fault (1st option)—Identity and existence certain,
-                                            location accurate. Sawteeth on upper (tectonically higher) plate</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 p-1">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <img src="./img/azgs100.png">
-                                        <h5 class="card-title" data-key="2.10.33">Listric fault</h5>
-                                        <p class="card-text">Listric fault at head of detachment fault (sense of slip
-                                            unspecified)—Identity and existence certain, location accurate. Ticks on
-                                            upper plate
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
 
+                        <div>
+                            <table id="mupsTable" class="table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="dtr-control"></th>
+                                        <th>Name</th>
+                                        <th class="min-desktop">Age</th>
+                                        <th class="min-desktop">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mupsTableBody">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mt-2">
-                <div class="mb-2" id="headingTwo">
+                <div class="mb-1" id="headingTwo">
                     <button class="btn btn-azblue text-white btn-lg btn-block collapsed" type="button"
                         data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
                         aria-controls="collapseTwo">
-                        GEOLOGIC UNITS
+                        FAULTS
                     </button>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#legends">
-                    <div>
-                        <table id="mupsTable" class="table" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th class="dtr-control"></th>
-                                    <th>Name</th>
-                                    <th class="min-desktop">Age</th>
-                                    <th class="min-desktop">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody id="mupsTableBody">
-                            </tbody>
-                        </table>
+
+                    <div class="row text-center">
+                        <div class="col-lg-3 col-md-6 p-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="./img/azgs100.png">
+                                    <h5 class="card-title" data-key="2.1.1">Fault</h5>
+                                    <p class="card-text">Fault (generic; vertical, subvertical, or high-angle; or
+                                        unknown or unspecified orientation or sense of slip) —Identity and existence
+                                        certain, location accurate</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 p-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="./img/azgs100.png">
+                                    <h5 class="card-title" data-key="2.10.1">Detachment fault</h5>
+                                    <p class="card-text">Detachment fault (sense of slip unspecified) (1st
+                                        option)—Identity and existence certain, location accurate. Hachures on upper
+                                        plate Detachment fault (sense of slip unspecified)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 p-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="./img/azgs100.png">
+                                    <h5 class="card-title" data-key="2.8.1">Thrust fault</h5>
+                                    <p class="card-text">Thrust fault (1st option)—Identity and existence certain,
+                                        location accurate. Sawteeth on upper (tectonically higher) plate</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 p-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="./img/azgs100.png">
+                                    <h5 class="card-title" data-key="2.10.33">Listric fault</h5>
+                                    <p class="card-text">Listric fault at head of detachment fault (sense of slip
+                                        unspecified)—Identity and existence certain, location accurate. Ticks on
+                                        upper plate
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
