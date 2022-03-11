@@ -382,7 +382,7 @@
                 function onAzgsClick(e) {
                     var features = leafletPip.pointInLayer(e.latlng, azgsMaps);
 
-                    if (features.length === 0 ){
+                    if (features.length === 0) {
                         return;
                     }
 
@@ -390,14 +390,15 @@
 
                     features.forEach((polygon) => {
                         console.log(polygon.feature.properties);
-                        bodyHtml += `<p><a class="text-decoration-none" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></p>`;
+                        bodyHtml += `<div><a class="text-decoration-none" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></div>`;
+                        bodyHtml += `<p class="font-weight-light">${polygon.feature.properties.abstract}</p>`
                     });
 
                     bodyHtml += '</div>';
 
                     var mapPlural = features.length === 1 ? "Map" : "Maps";
 
-                    $("#Modal .modal-title").text(`Geologic ${mapPlural}`);
+                    $("#Modal .modal-title").text(`Arizona Geological Survey Digital Geologic ${mapPlural}`);
                     $("#Modal .modal-age").text("");
                     $("#Modal .modal-body").html(bodyHtml);
                     $("#Modal .modal-header").css("background-color", "#D3D3D3");
