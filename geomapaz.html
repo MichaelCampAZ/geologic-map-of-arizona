@@ -387,13 +387,12 @@
                     }
 
                     var bodyHtml = "<div>";
-
                     features.forEach((polygon) => {
-                        console.log(polygon.feature.properties);
-                        bodyHtml += `<div><a class="text-decoration-none" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></div>`;
-                        bodyHtml += `<p class="font-weight-light">${polygon.feature.properties.abstract}</p>`
+                        if (polygon.feature.properties.links[0]) {
+                            bodyHtml += `<div class="mb-2"><a class="text-decoration-none" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a>`;
+                            bodyHtml += `<p class="font-weight-light d-none d-sm-block">${polygon.feature.properties.abstract}</p></div>`
+                        }
                     });
-
                     bodyHtml += '</div>';
 
                     var mapPlural = features.length === 1 ? "Map" : "Maps";
