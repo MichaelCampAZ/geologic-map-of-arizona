@@ -210,7 +210,10 @@ $(function () {
     // Build the MUP legend
     $.each(MupsJson, function (index, value) {
         var rgb = value.rgb;
-        var age = value.age;
+        // var age = value.age;
+
+        var age = value.b_age + " - " + value.t_age + " " + value.age_unit;
+
         var mapunit = value.mapunit;
         var name = value.name;
         var description = value.description;
