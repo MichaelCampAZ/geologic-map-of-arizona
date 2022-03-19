@@ -352,8 +352,42 @@ var fixedDMU = [
     {
       "MapUnit": "W",
       "Name": "Water",
-      "Age": 0,
+      "Age": "",
       "Description": "Water",
       "AreaFillRGB": "227;249;251"
     }
   ]
+
+  $(function () { 
+
+    var MapUnitPolysStyles = {};
+
+    $.getJSON("https://vectortileservices1.arcgis.com/Ezk9fcjSUkeadg6u/arcgis/rest/services/MapUnitPolysFixedDMU/VectorTileServer/resources/styles/root.json?f=pjson", function success(data) {
+
+        $.each(data.layers, function (key, val) {
+
+            var id = val.id.replace(val["source-layer"] + "/", "");
+            var id = id.replace("/1", "");
+
+            var mapUnit = fixedDMU.find((o) => { return o["MapUnit"] === id })
+
+            var rgb = "rgb(" + mapUnit.AreaFillRGB.replaceAll(";", ",") + ")";
+
+            MapUnitPolysStyles[key] = {
+                "mapunit": id,
+                "name": mapUnit.Name,
+                "nameDMU": mapUnit.Name,
+                "description": mapUnit.Description,
+                "age": mapUnit.Age,
+                "b_age": "",
+                "t_age": "",
+                "rgb": rgb,
+            }
+
+        });
+
+        console.log(MapUnitPolysStyles);
+
+    });
+
+  })
