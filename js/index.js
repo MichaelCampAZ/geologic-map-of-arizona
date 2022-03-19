@@ -65,15 +65,20 @@ $(function () {
 
         // Get the map unit from the symbol
         var MapUnit = MupsJson[symbol]
-
         var rgb = MapUnit.rgb;
+        var mapunit = MapUnit.mapunit;
         var name = MapUnit.name;
         var description = MapUnit.description;
-        var age = MapUnit.age;
+        var age = "";
+
+        if (MapUnit.name !== 'Water') {
+            var age = `${MapUnit.age} (${MapUnit.b_age} - ${MapUnit.t_age} ${MapUnit.age_unit})`;
+        }
 
         // BOOTSTRAP MODAL 
         var body = `<p>${description}</p>`
         $("#Modal .modal-title").text(name);
+        $("#Modal .modal-mapunit").text(mapunit);
         $("#Modal .modal-age").text(age);
         $("#Modal .modal-body").html(body);
         $("#Modal .modal-header").css("background-color", rgb);
@@ -139,6 +144,7 @@ $(function () {
             var mapPlural = features.length === 1 ? "Map" : "Maps";
 
             $("#Modal .modal-title").text(`Arizona Geological Survey Digital Geologic ${mapPlural}`);
+            $("#Modal .modal-mapunit").text("");
             $("#Modal .modal-age").text("");
             $("#Modal .modal-body").html(bodyHtml);
             $("#Modal .modal-header").css("background-color", "#D3D3D3");
@@ -174,7 +180,7 @@ $(function () {
                 var url = value.properties.links[0].url;
 
                 var authors = "";
-                $.each(value.properties.authors, function (index, value) {
+                $.each(value.properties.authors, function (value) {
                     if (value.person) {
                         authors += value.person + "<br />";
                     }
@@ -185,7 +191,7 @@ $(function () {
 
         });
 
-        var azgsTable = $('#azgsMapTable').DataTable({
+        $('#azgsMapTable').DataTable({
             autoWidth: false,
             columnDefs: [
                 { orderable: false, targets: 0 }
@@ -210,19 +216,35 @@ $(function () {
     // Build the MUP legend
     $.each(MupsJson, function (index, value) {
         var rgb = value.rgb;
-        // var age = value.age;
+        var age = value.age;
 
-        var age = value.b_age + " - " + value.t_age + " " + value.age_unit;
+        var earlyAge = `${value.b_age} ${value.age_unit}`;
+        var lateAge = `${value.t_age} ${value.age_unit}`;
+        var earlyAgeSort = value.b_age;
+        var lateAgeSort = value.b_age;
 
+        // Sort value
+        if (value.age_unit === 'ka') {
+            earlyAgeSort = earlyAgeSort * 1000;
+            lateAgeSort = lateAgeSort * 1000;
+        }
+        else if (value.age_unit === 'Ma') {
+            earlyAgeSort = earlyAgeSort * 1000000;
+            lateAgeSort = lateAgeSort * 1000000;
+        } else {
+            // Water
+            age = "";
+            earlyAgeSort = -1;
+            lateAgeSort = -1;
+        }
         var mapunit = value.mapunit;
-        var name = value.name;
+        var name = value.nameDMU;
         var description = value.description;
 
-        $("#mupsTableBody").append(`<tr><td></td>><td style="font-size:1.05rem;background-color:${rgb};" >${name}</td><td>${mapunit}</td><td>${age}</td><td>${description}</td></tr>`);
-
+        $("#mupsTableBody").append(`<tr><td></td>><td style="font-size:1.05rem;background-color:${rgb};" >${name}</td><td>${mapunit}</td><td>${age}</td><td data-sort="${earlyAgeSort}">${earlyAge}</td><td data-sort="${lateAgeSort}">${lateAge}</td><td>${description}</td></tr>`);
     });
 
-    var mupsTable = $('#mupsTable').DataTable({
+    $('#mupsTable').DataTable({
         autoWidth: false,
         responsive: true,
         columnDefs: [
