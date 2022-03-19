@@ -209,7 +209,7 @@
                             <thead>
                                 <tr>
                                     <th class="dtr-control"></th>
-                                    <th class="min-tablet-p">Year</th>
+                                    <th class="min-tablet-l">Year</th>
                                     <th class="" data-priority="1">Title</th>
                                     <th class="none">Author</th>
                                     <th class="none">Abstract</th>
@@ -409,6 +409,7 @@
                     filter: function (feature) {
                         // Remove the big datasets
                         if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
+                            console.log(feature);
                             return false;
                         }
 
