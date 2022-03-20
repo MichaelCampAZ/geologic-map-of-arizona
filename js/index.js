@@ -157,6 +157,7 @@ $(function () {
             filter: function (feature) {
                 // Remove the big datasets
                 if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
+                    console.log(feature);
                     return false;
                 }
 
