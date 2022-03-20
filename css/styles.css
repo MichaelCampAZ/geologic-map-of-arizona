@@ -45,3 +45,9 @@
   color: #333333;
   background-color: #e6e3d9;
 }
+
+.footer-link {
+  color: #333; 
+  font-weight: 700; 
+  text-decoration: underline;
+}
