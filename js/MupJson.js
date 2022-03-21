@@ -555,8 +555,8 @@ var MupsJson = {
         "nameDMU": "Water",
         "description": "Water",
         "age": "",
-        "b_age": 0,
-        "t_age": 0,
+        "b_age": null,
+        "t_age": null,
         "age_unit": "",
         "rgb": "rgb(227,249,251)"
     }
