@@ -239,7 +239,7 @@ $(function () {
             lateAgeSort = -1;
         }
         var mapunit = value.mapunit;
-        var name = value.nameDMU;
+        var name = value.name;
         var description = value.description;
 
         $("#mupsTableBody").append(`<tr><td></td>><td style="font-size:1.05rem;background-color:${rgb};" >${name}</td><td>${mapunit}</td><td>${age}</td><td data-sort="${earlyAgeSort}">${earlyAge}</td><td data-sort="${lateAgeSort}">${lateAge}</td><td>${description}</td></tr>`);
@@ -247,6 +247,7 @@ $(function () {
 
     $('#mupsTable').DataTable({
         autoWidth: false,
+        fixedHeader: true,
         responsive: true,
         columnDefs: [
             { orderable: false, targets: 0 }
