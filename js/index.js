@@ -157,6 +157,7 @@ $(function () {
             filter: function (feature) {
                 // Remove the big datasets
                 if (feature.properties.identifiers.perm_id === 'ADGM-1552430548157-680') {
+                    console.log(feature);
                     return false;
                 }
 
@@ -231,8 +232,13 @@ $(function () {
         else if (value.age_unit === 'Ma') {
             earlyAgeSort = earlyAgeSort * 1000000;
             lateAgeSort = lateAgeSort * 1000000;
-        } 
-
+        } else {
+            // Water
+            earlyAge = "";
+            lateAge = "";
+            earlyAgeSort = null;
+            lateAgeSort = null;
+        }
         var mapunit = value.mapunit;
         var name = value.name;
         var description = value.description;
