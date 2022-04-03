@@ -65,7 +65,7 @@ $(function () {
 
         // Get the map unit from the symbol
         var MapUnit = MupsJson[symbol]
-        
+
         var rgb = MapUnit.rgb;
         var mapunit = MapUnit.mapunit;
         var name = MapUnit.name;
@@ -188,7 +188,7 @@ $(function () {
                     }
                 });
 
-                $("#azgsMapTableBody").append(`<tr><td></td><td>${year}</td><td>${title}<td><a href="${url}" target="_blank">${url}</a></td><td>${authors}</td></td><td>${abstract}</td></tr>`);
+                $("#azgsMapTableBody").append(`<tr><td></td><td>${year}</td><td>${title}</td><td><a class="text-truncate" href="${url}" target="_blank">AZGS Document Repository</a></td><td>${authors}</td></td><td>${abstract}</td></tr>`);
             }
 
         });
