@@ -252,7 +252,9 @@ $(function () {
         fixedHeader: true,
         responsive: true,
         columnDefs: [
-            { orderable: false, targets: 0 }
+            { orderable: false, targets: 0 },
+            { type: "num", targets: 4 },
+            { type: "num", targets: 5 }
         ],
         order: [[1, 'asc']],
     });
