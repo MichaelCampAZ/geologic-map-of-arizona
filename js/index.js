@@ -18,7 +18,7 @@ $(function () {
 
     // OpenStreetMap Basemap
     var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>'
+        attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>'
     });
 
     // Basemap layer group
