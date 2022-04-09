@@ -227,10 +227,12 @@ $(function () {
 
         // Sort value
         if (value.age_unit === 'ka') {
+            // Multiply Ka by a thousand years
             earlyAgeSort = earlyAgeSort * 1000;
             lateAgeSort = lateAgeSort * 1000;
         }
         else if (value.age_unit === 'Ma') {
+            // Multiply Ma by a million years
             earlyAgeSort = earlyAgeSort * 1000000;
             lateAgeSort = lateAgeSort * 1000000;
         } else {
