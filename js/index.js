@@ -136,7 +136,7 @@ $(function () {
             var bodyHtml = "<div>";
             features.forEach((polygon) => {
                 if (polygon.feature.properties.links[0]) {
-                    bodyHtml += `<div class="mb-2"><h5><a class="text-decoration-none" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></h5>`;
+                    bodyHtml += `<div class="mb-2"><h2><a class="text-decoration-none" target="_blank" href="${polygon.feature.properties.links[0].url}">${polygon.feature.properties.title}</a></h2>`;
                     bodyHtml += `<p class="font-weight-light d-none d-sm-block">${polygon.feature.properties.abstract}</p></div>`
                 }
             });
