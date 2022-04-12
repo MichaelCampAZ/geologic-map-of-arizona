@@ -77,11 +77,10 @@ $(function () {
         }
 
         // BOOTSTRAP MODAL 
-        var body = `<p>${description}</p>`
         $("#Modal .modal-title").text(name);
-        $("#Modal .modal-mapunit").text(mapunit);
-        $("#Modal .modal-age").text(age);
-        $("#Modal .modal-body").html(body);
+        $("#Modal .modal-mapunit").html(`<span class="font-weight-bold">Map Unit: </span>${mapunit}`);
+        $("#Modal .modal-age").html(`<span class="font-weight-bold">Age: </span>${age}`);
+        $("#Modal .modal-body").html(`<p>${description}</p>`);
         $("#Modal .modal-header").css("background-color", rgb);
         $('#Modal').modal('show');
     });
