@@ -258,7 +258,7 @@ $(function () {
             { type: "num", targets: 4 },
             { type: "num", targets: 5 }
         ],
-        order: [[1, 'asc']],
+        order: [[4, 'asc']],
     });
 
 });
