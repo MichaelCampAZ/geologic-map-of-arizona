@@ -187,6 +187,8 @@ $(function () {
                 });
 
                 $("#azgsMapTableBody").append(`<tr><td></td><td>${year}</td><td>${title}</td><td><a class="text-truncate" href="${url}" target="_blank">AZGS Document Repository</a></td><td>${authors}</td></td><td>${abstract}</td></tr>`);
+            } else {
+                //console.log(value.properties.identifiers.perm_id);
             }
 
         });
