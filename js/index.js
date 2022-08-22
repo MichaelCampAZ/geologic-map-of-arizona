@@ -223,7 +223,7 @@ $(function () {
         var earlyAge = `${value.b_age} ${value.age_unit}`;
         var lateAge = `${value.t_age} ${value.age_unit}`;
         var earlyAgeSort = value.b_age;
-        var lateAgeSort = value.b_age;
+        var lateAgeSort = value.t_age;
 
         // Sort value
         if (value.age_unit === 'ka') {
@@ -258,7 +258,7 @@ $(function () {
             { type: "num", targets: 4 },
             { type: "num", targets: 5 }
         ],
-        order: [[4, 'asc']],
+        order: [[4, 'asc'], [5, 'asc']],
     });
 
 });
